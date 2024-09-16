@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{95DFE9F1-2019-4938-96EF-2AB5AE8C5B59}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>canchacubo</RootNamespace>
+    <AssemblyName>canchacubo</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="clases\reserva.cs" />
+    <Compile Include="cliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cliente.Designer.cs">
+      <DependentUpon>cliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="consultarcliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="consultarcliente.Designer.cs">
+      <DependentUpon>consultarcliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="consultarpromocion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="consultarpromocion.Designer.cs">
+      <DependentUpon>consultarpromocion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="crearcliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="crearcliente.Designer.cs">
+      <DependentUpon>crearcliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="crearpromocion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="crearpromocion.Designer.cs">
+      <DependentUpon>crearpromocion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="editarcliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="editarcliente.Designer.cs">
+      <DependentUpon>editarcliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="editarpromocion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="editarpromocion.Designer.cs">
+      <DependentUpon>editarpromocion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="eliminarcliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="eliminarcliente.Designer.cs">
+      <DependentUpon>eliminarcliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="eliminarpromocion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="eliminarpromocion.Designer.cs">
+      <DependentUpon>eliminarpromocion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="informes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="informes.Designer.cs">
+      <DependentUpon>informes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ingresos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ingresos.Designer.cs">
+      <DependentUpon>ingresos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="principal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="principal.Designer.cs">
+      <DependentUpon>principal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="promociones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="promociones.Designer.cs">
+      <DependentUpon>promociones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="reservas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="reservas.Designer.cs">
+      <DependentUpon>reservas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="validareserva.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="validareserva.Designer.cs">
+      <DependentUpon>validareserva.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="cliente.resx">
+      <DependentUpon>cliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="consultarcliente.resx">
+      <DependentUpon>consultarcliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="consultarpromocion.resx">
+      <DependentUpon>consultarpromocion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="crearcliente.resx">
+      <DependentUpon>crearcliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="crearpromocion.resx">
+      <DependentUpon>crearpromocion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="editarcliente.resx">
+      <DependentUpon>editarcliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="editarpromocion.resx">
+      <DependentUpon>editarpromocion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="eliminarcliente.resx">
+      <DependentUpon>eliminarcliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="eliminarpromocion.resx">
+      <DependentUpon>eliminarpromocion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="informes.resx">
+      <DependentUpon>informes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ingresos.resx">
+      <DependentUpon>ingresos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="principal.resx">
+      <DependentUpon>principal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="promociones.resx">
+      <DependentUpon>promociones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reservas.resx">
+      <DependentUpon>reservas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="validareserva.resx">
+      <DependentUpon>validareserva.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fondo.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
