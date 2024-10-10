@@ -38,7 +38,7 @@ namespace canchacubo.clases
             {
                 OracleCommand command = new OracleCommand();
                 command.Connection = connection;
-                command.CommandText = "INSERTAR_CLIENTE";
+                command.CommandText = "bdcanchascubo.INSERTAR_CLIENTE";
                 command.CommandType = CommandType.StoredProcedure;
 
 
@@ -74,9 +74,7 @@ namespace canchacubo.clases
                         case 20006:
                             MessageBox.Show("Error: El estado solo puede ser el número 0 o 1", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
-                        case 20007:
-                            MessageBox.Show("Error: El nombre no debe contener espacios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
+                       
                         case 20008:
                             MessageBox.Show("Error: El ide ya esta registrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
@@ -87,7 +85,7 @@ namespace canchacubo.clases
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al registrar el lector: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error al registrar el cliente: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }

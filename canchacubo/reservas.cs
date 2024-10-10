@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace canchacubo
 {
@@ -86,7 +87,7 @@ namespace canchacubo
         private void QuitarBordes()
         { 
             cancha1.BorderStyle = BorderStyle.None;
-           cancha2.BorderStyle = BorderStyle.None;
+            cancha2.BorderStyle = BorderStyle.None;
             cancha3.BorderStyle = BorderStyle.None;
             cancha4.BorderStyle = BorderStyle.None;
             cancha5.BorderStyle = BorderStyle.None;
@@ -94,9 +95,24 @@ namespace canchacubo
 
         private void btn_reservar_Click(object sender, EventArgs e)
         {
-            string hora = cbx_horario.Text;
+            if (cbx_horario.SelectedIndex == -1)
+            {
+                MessageBox.Show("Por favor, seleccione una opción para la hora.", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            DateTime fechaSeleccionada = txt_fecha.Value;
+            if (fechaSeleccionada == txt_fecha.MinDate)
+            {
+                fechaSeleccionada = DateTime.Now;
+            }
+            if (canchaSeleccionada == 0)
+            {
+                MessageBox.Show("Por favor, seleccione una cancha.", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string hora = cbx_horario.SelectedItem.ToString();
             string fecha = txt_fecha.Text;
-            validareserva objeto = new validareserva(fecha, hora,canchaSeleccionada);
+            validareserva objeto = new validareserva(fechaSeleccionada, hora,canchaSeleccionada);
             objeto.Show();
             this.Hide();
         }

@@ -13,10 +13,10 @@ namespace canchacubo
 {
     public partial class validareserva : Form
     {
-        string fecha;
+        DateTime fecha;
         string hora;
         int cancha;
-        public validareserva(String fecha, string hora, int cancha)
+        public validareserva(DateTime fecha, string hora, int cancha)
         {
             this.fecha = fecha;
             this.hora = hora;
@@ -45,7 +45,7 @@ namespace canchacubo
         {
             string id_cliente = txt_id_cliente.Text;
             clsReserva reserva_obj = new clsReserva();
-            reserva_obj.registrarreserva(fecha, hora, cancha);
+            reserva_obj.registrarreserva(fecha, hora, id_cliente, cancha);
         }
     }
 }
