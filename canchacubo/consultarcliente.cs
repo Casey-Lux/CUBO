@@ -48,6 +48,7 @@ namespace canchacubo
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+
         }
 
         private void consultarcliente_Load(object sender, EventArgs e)
