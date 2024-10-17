@@ -1,4 +1,5 @@
-﻿using System;
+﻿using canchacubo.clases;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,7 @@ namespace canchacubo
 {
     public partial class consultarcliente : Form
     {
+        clsConsulta consulta = new clsConsulta();
         public consultarcliente()
         {
             InitializeComponent();
@@ -24,6 +26,10 @@ namespace canchacubo
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string idCliente = txtIdentificacion.Text.Trim();
+
+            // Llama al método de consulta y pasa el ID
+            consulta.consultar_cliente(idCliente);
 
         }
 
@@ -32,6 +38,21 @@ namespace canchacubo
             cliente clientes = new cliente();
             clientes.Show(); // 
             this.Hide();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void consultarcliente_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
