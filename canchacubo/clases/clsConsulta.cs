@@ -9,6 +9,7 @@ namespace canchacubo.clases
     {
         string cadenaConexion = "Data Source = localhost; User ID = MY_USER; Password = USER654321";
 
+
         public void consultar_cliente(string id_cliente)
         {
             if (string.IsNullOrEmpty(id_cliente) || !int.TryParse(id_cliente, out _))
