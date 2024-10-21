@@ -84,7 +84,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clases\cliente.cs" />
-    <Compile Include="clases\clsConsulta.cs" />
     <Compile Include="clases\clsReserva.cs" />
     <Compile Include="cliente.cs">
       <SubType>Form</SubType>

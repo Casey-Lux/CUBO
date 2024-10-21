@@ -13,7 +13,7 @@ namespace canchacubo
 {
     public partial class consultarcliente : Form
     {
-        clsConsulta consulta = new clsConsulta();
+        clsCliente cliente_obj = new clsCliente();
         public consultarcliente()
         {
             InitializeComponent();
@@ -27,9 +27,8 @@ namespace canchacubo
         private void button1_Click(object sender, EventArgs e)
         {
             string idCliente = txtIdentificacion.Text.Trim();
-
             // Llama al método de consulta y pasa el ID
-            consulta.consultar_cliente(idCliente);
+            cliente_obj.consultar_cliente(idCliente);
 
         }
 

@@ -69,6 +69,7 @@
             this.txt_identificacion.Name = "txt_identificacion";
             this.txt_identificacion.Size = new System.Drawing.Size(138, 20);
             this.txt_identificacion.TabIndex = 6;
+            this.txt_identificacion.TextChanged += new System.EventHandler(this.txt_identificacion_TextChanged);
             // 
             // txtt_nombre
             // 
@@ -76,6 +77,7 @@
             this.txtt_nombre.Name = "txtt_nombre";
             this.txtt_nombre.Size = new System.Drawing.Size(138, 20);
             this.txtt_nombre.TabIndex = 7;
+            this.txtt_nombre.TextChanged += new System.EventHandler(this.txtt_nombre_TextChanged);
             // 
             // txt_telefono
             // 
@@ -83,6 +85,7 @@
             this.txt_telefono.Name = "txt_telefono";
             this.txt_telefono.Size = new System.Drawing.Size(138, 20);
             this.txt_telefono.TabIndex = 8;
+            this.txt_telefono.TextChanged += new System.EventHandler(this.txt_telefono_TextChanged);
             // 
             // txt_estado
             // 
@@ -90,6 +93,7 @@
             this.txt_estado.Name = "txt_estado";
             this.txt_estado.Size = new System.Drawing.Size(138, 20);
             this.txt_estado.TabIndex = 9;
+            this.txt_estado.TextChanged += new System.EventHandler(this.txt_estado_TextChanged);
             // 
             // label2
             // 
@@ -111,6 +115,7 @@
             this.label3.Size = new System.Drawing.Size(65, 20);
             this.label3.TabIndex = 11;
             this.label3.Text = "Nombre";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -121,6 +126,7 @@
             this.label4.Size = new System.Drawing.Size(71, 20);
             this.label4.TabIndex = 12;
             this.label4.Text = "Telefono";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -131,6 +137,7 @@
             this.label5.Size = new System.Drawing.Size(60, 20);
             this.label5.TabIndex = 13;
             this.label5.Text = "Estado";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // btn_crearcliente
             // 
@@ -162,6 +169,7 @@
             this.Controls.Add(this.label1);
             this.Name = "crearcliente";
             this.Text = "crearcliente";
+            this.Load += new System.EventHandler(this.crearcliente_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
