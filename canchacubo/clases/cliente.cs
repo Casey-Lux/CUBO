@@ -93,12 +93,22 @@ namespace canchacubo.clases
 
         public void consultar_cliente(string id_cliente)
         {
-            if (string.IsNullOrEmpty(id_cliente) || !int.TryParse(id_cliente, out _))
+            
+            if (Regex.IsMatch(id_cliente, @"^[a-zA-Z]+$"))
+            {
+                MessageBox.Show("La identificacion no puede contener letras. Debe ser un número válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (Regex.IsMatch(id_cliente, @"^[a-zA-Z0-9]+$") && Regex.IsMatch(id_cliente, @"[a-zA-Z]"))
+            {
+                MessageBox.Show("La identificacion no puede contener letras y números. Debe ser solo números.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!int.TryParse(id_cliente, out _))
             {
                 MessageBox.Show("La cédula debe ser un número válido. Inténtalo de nuevo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
             using (OracleConnection connection = new OracleConnection(cadenaConexion))
             {
                 OracleCommand command = new OracleCommand();
@@ -143,6 +153,11 @@ namespace canchacubo.clases
 
         public void EditarCliente(string idCliente, string nuevoNombre, string nuevoTelefono, string nuevoEstado)
         {
+            if (Regex.IsMatch(idCliente, @"^[a-zA-Z0-9]+$") && Regex.IsMatch(idCliente, @"[a-zA-Z]"))
+            {
+                MessageBox.Show("La identificacion no puede contener letras y números. Debe ser solo números.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             if (!Regex.IsMatch(idCliente, @"^\d+$"))
             {
                 MessageBox.Show("La cédula debe ser un numero valido,Intentalo de nuevo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -203,7 +218,9 @@ namespace canchacubo.clases
                         case 20008:
                             MessageBox.Show("Error: El ide no esta registrado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
-
+                        case 20013:
+                            MessageBox.Show("Error:existe una reserva para esta cancha en este horario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
                         default:
                             MessageBox.Show("Error al actualizar el : " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;

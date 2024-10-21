@@ -26,8 +26,13 @@ namespace canchacubo
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             string idCliente = txtIdentificacion.Text.Trim();
-            // Llama al método de consulta y pasa el ID
+            if (string.IsNullOrWhiteSpace(idCliente))
+            {
+                MessageBox.Show("La cédula no puede estar vacía. Inténtalo de nuevo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             cliente_obj.consultar_cliente(idCliente);
 
         }

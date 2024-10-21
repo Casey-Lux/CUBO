@@ -43,7 +43,12 @@ namespace canchacubo
 
         private void registrar_Click(object sender, EventArgs e)
         {
-            string id_cliente = txt_id_cliente.Text;
+             string id_cliente = txt_id_cliente.Text;
+            if (string.IsNullOrEmpty(id_cliente) )
+            {
+                MessageBox.Show("Por favor rellene los campos obligatorios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             clsReserva reserva_obj = new clsReserva();
             reserva_obj.registrarreserva(fecha, hora, id_cliente, cancha);
         }
