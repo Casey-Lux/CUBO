@@ -200,9 +200,6 @@ namespace canchacubo.clases
                         case 20006:
                             MessageBox.Show("Error: El estado solo puede ser el número 0 o 1", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
-                        case 20007:
-                            MessageBox.Show("Error:Error: El ide no esta registrado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
                         case 20008:
                             MessageBox.Show("Error: El ide no esta registrado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
