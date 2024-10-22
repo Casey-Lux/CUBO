@@ -100,10 +100,10 @@ namespace canchacubo
                 MessageBox.Show("Por favor, seleccione una opción para la hora.", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            DateTime fechaSeleccionada = txt_fecha.Value;
+            DateTime fechaSeleccionada = txt_fecha.Value.Date;
             if (fechaSeleccionada == txt_fecha.MinDate)
             {
-                fechaSeleccionada = DateTime.Now;
+                fechaSeleccionada = DateTime.Now.Date;
             }
             if (canchaSeleccionada == 0)
             {

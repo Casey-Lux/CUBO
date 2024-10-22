@@ -53,15 +53,31 @@ namespace canchacubo.clases
                 {
                     switch (ex.Number)
                     {
-                        case 20008:
-                            MessageBox.Show("Error: LA cancha ya se encuentra reservada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        case 20001:
+                            MessageBox.Show("Error: la fecha de la reserva no puede ser anterior a la fecha actual.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
-                        case 20009:
-                            MessageBox.Show("Error: violación de clave foránea, cliente inexistente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        case 20002:
+                            MessageBox.Show("Error: ya existe una reserva para esta cancha en el mismo horario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
-                        case 20010:
-                            MessageBox.Show("Error: la fecha de la reserva.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        case 20004:
+                           DialogResult result = MessageBox.Show(
+                         "Error:  cliente inexistente. ¿Desea registrar al cliente?",
+                        "Cliente no encontrado",
+                        MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Question
+                        );
+
+                            // Si el usuario elige 'Sí', redirigir al formulario de registro de cliente
+                            if (result == DialogResult.Yes)
+                            {
+                                crearcliente cliente = new crearcliente();
+                                cliente.Show();      
+                            }
                             break;
+                        case 20005:
+                            MessageBox.Show("Error: formato de fecha incorrecto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        
                         default:
                             MessageBox.Show("Error al registrar el: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
