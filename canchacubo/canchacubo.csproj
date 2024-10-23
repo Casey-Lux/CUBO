@@ -83,7 +83,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="clases\cliente.cs" />
+    <Compile Include="clases\clsCliente.cs" />
     <Compile Include="clases\clsReserva.cs" />
     <Compile Include="cliente.cs">
       <SubType>Form</SubType>

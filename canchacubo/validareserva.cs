@@ -50,7 +50,7 @@ namespace canchacubo
                 return;
             }
             clsReserva reserva_obj = new clsReserva();
-            reserva_obj.registrarreserva(fecha, hora, id_cliente, cancha);
+            reserva_obj.Registrar_Reserva(fecha, hora, id_cliente, cancha);
         }
     }
 }

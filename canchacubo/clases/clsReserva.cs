@@ -11,84 +11,109 @@ namespace canchacubo.clases
         string cadenaConexion = "Data Source = localhost; User ID = MY_USER;Password=USER654321";
         int estado = 1;
 
-        public void registrarreserva(DateTime fecha, string horaSeleccionada, string id_cliente, int num_cancha)
+        public void Registrar_Reserva(DateTime fecha, string horaSeleccionada, string id_cliente, int num_cancha)
+        {
+            try
+            {
+                // Validamos los datos usando el método validar_reserva
+                if (validar_reserva(fecha, horaSeleccionada, id_cliente, num_cancha))
+                {
+                    DateTime horaInicio;
+                    // Convertimos la hora seleccionada a un DateTime con valores ficticios para año, mes y día
+                    DateTime.TryParse(horaSeleccionada, out horaInicio);
+                    horaInicio = new DateTime(1, 1, 1, horaInicio.Hour, horaInicio.Minute, 0);
+
+                    using (OracleConnection connection = new OracleConnection(cadenaConexion))
+                    {
+                        OracleCommand command = new OracleCommand();
+                        command.Connection = connection;
+                        command.CommandText = "bdcanchascubo.insertar_reserva";
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        // Agregamos los parámetros requeridos por el procedimiento almacenado
+                        command.Parameters.Add("p_fecha", OracleDbType.Date).Value = fecha;
+                        command.Parameters.Add("p_horai", OracleDbType.Date).Value = horaInicio;
+                        command.Parameters.Add("p_cliente", OracleDbType.Decimal).Value = id_cliente;
+                        command.Parameters.Add("p_estado", OracleDbType.Decimal).Value = estado; // Asegúrate de definir este valor
+                        command.Parameters.Add("p_cancha", OracleDbType.Decimal).Value = num_cancha;
+
+                        // Ejecutamos la consulta
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        MessageBox.Show("Reserva registrada", "Registro Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                // Capturamos los errores de validación desde el método validar_reserva
+                MessageBox.Show(ex.Message, "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (OracleException ex)
+            {
+                // Manejo de errores específicos de Oracle
+                switch (ex.Number)
+                {
+                    case 20001:
+                        MessageBox.Show("Error: la fecha de la reserva no puede ser anterior a la fecha actual.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 20002:
+                        MessageBox.Show("Error: ya existe una reserva para esta cancha en el mismo horario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 20004:
+                        DialogResult result = MessageBox.Show(
+                            "Error: cliente inexistente. ¿Desea registrar al cliente?",
+                            "Cliente no encontrado",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Question
+                        );
+
+                        if (result == DialogResult.Yes)
+                        {
+                            crearcliente cliente = new crearcliente();
+                            cliente.Show(); // Redirigimos al formulario de creación de cliente
+                        }
+                        break;
+                    case 20005:
+                        MessageBox.Show("Error: formato de fecha incorrecto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    default:
+                        MessageBox.Show("Error al registrar la reserva: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Capturamos cualquier otro tipo de error
+                MessageBox.Show("Error al registrar la reserva: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public bool validar_reserva(DateTime fecha, string horaSeleccionada, string id_cliente, int num_cancha)
         {
             if (!Regex.IsMatch(id_cliente, @"^\d+$"))
             {
-                MessageBox.Show("La cédula debe ser un número válido. Inténtalo de nuevo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                throw new ArgumentException("La cédula debe ser un número válido. Inténtalo de nuevo.");
             }
             DateTime horaInicio;
             if (!DateTime.TryParse(horaSeleccionada, out horaInicio))
             {
-                MessageBox.Show("La hora seleccionada no es válida. Asegúrate de seleccionar un formato correcto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                throw new ArgumentException("La hora seleccionada no es válida. Asegúrate de seleccionar un formato correcto..");
             }
-
-
-            horaInicio = new DateTime(1, 1, 1, horaInicio.Hour, horaInicio.Minute, 0); // Establece un año, mes, y día ficticio
-
-
-            using (OracleConnection connection = new OracleConnection(cadenaConexion))
+            if (horaInicio.Hour < 12 || horaInicio.Hour > 23)
             {
-                OracleCommand command = new OracleCommand();
-                command.Connection = connection;
-                command.CommandText = "bdcanchascubo.insertar_reserva";
-                command.CommandType = CommandType.StoredProcedure;
-
-                // Pasamos el valor de fecha directamente desde el DateTimePicker
-                command.Parameters.Add("p_fecha", OracleDbType.Date).Value = fecha;
-                command.Parameters.Add("p_horai", OracleDbType.Date).Value = horaInicio;
-                command.Parameters.Add("p_cliente", OracleDbType.Decimal).Value = id_cliente;
-                command.Parameters.Add("p_estado", OracleDbType.Decimal).Value = estado;
-                command.Parameters.Add("p_cancha", OracleDbType.Decimal).Value = num_cancha;
-
-                try
-                {
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                    MessageBox.Show("Reserva registrada", "Registro Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (OracleException ex)
-                {
-                    switch (ex.Number)
-                    {
-                        case 20001:
-                            MessageBox.Show("Error: la fecha de la reserva no puede ser anterior a la fecha actual.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-                        case 20002:
-                            MessageBox.Show("Error: ya existe una reserva para esta cancha en el mismo horario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-                        case 20004:
-                           DialogResult result = MessageBox.Show(
-                         "Error:  cliente inexistente. ¿Desea registrar al cliente?",
-                        "Cliente no encontrado",
-                        MessageBoxButtons.YesNo,
-                            MessageBoxIcon.Question
-                        );
-
-                            // Si el usuario elige 'Sí', redirigir al formulario de registro de cliente
-                            if (result == DialogResult.Yes)
-                            {
-                                crearcliente cliente = new crearcliente();
-                                cliente.Show();      
-                            }
-                            break;
-                        case 20005:
-                            MessageBox.Show("Error: formato de fecha incorrecto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-                        
-                        default:
-                            MessageBox.Show("Error al registrar el: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al registrar la reserva: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                throw new ArgumentException("La hora de la reserva debe estar entre las 12:00 y las 23:00 horas.");
             }
-        }
+            if (fecha < DateTime.Now)
+            {
+                throw new ArgumentException("La fecha de la reserva no puede ser anterior a la fecha actual.");
+            }
+            if (num_cancha < 1 || num_cancha > 5)
+            {
+                throw new ArgumentException("El número de cancha debe estar entre 1 y 5.");
+            }
 
+            return true;
+        }
     }
 }
