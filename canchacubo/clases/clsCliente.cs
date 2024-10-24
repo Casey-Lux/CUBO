@@ -21,7 +21,7 @@ namespace canchacubo.clases
             try
             {
                 // Intentamos validar los datos antes de insertar
-                if (ValidarDatosCliente(cedula, nombre, telefono))
+                if (ValidarDatosCliente(cedula, nombre, telefono, estado))
                 {
                     // Si la validación es exitosa, procedemos con la inserción
                     using (OracleConnection connection = new OracleConnection(cadenaConexion))
@@ -138,7 +138,7 @@ namespace canchacubo.clases
         {
             try
             {
-                if (ValidarDatosCliente(idCliente, nuevoNombre, nuevoTelefono))
+                if (ValidarDatosCliente(idCliente, nuevoNombre, nuevoTelefono, nuevoEstado))
                 {
                     using (OracleConnection connection = new OracleConnection(cadenaConexion))
                     {
@@ -184,6 +184,9 @@ namespace canchacubo.clases
                     case 20006:
                         MessageBox.Show("Error: El estado solo puede ser el número 0 o 1", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
+                    case 20007:
+                        MessageBox.Show("Error:Los nuevos datos son iguales a los datos existentes.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
                     case 20008:
                         MessageBox.Show("Error: El ID no está registrado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
@@ -201,7 +204,7 @@ namespace canchacubo.clases
             }
         }
 
-        public bool ValidarDatosCliente(string cedula, string nombre, string telefono)
+        public bool ValidarDatosCliente(string cedula, string nombre, string telefono, string estado)
         {
             if (!Regex.IsMatch(cedula, @"^\d+$"))
             {
@@ -218,7 +221,10 @@ namespace canchacubo.clases
             {
                 throw new ArgumentException("El nombre debe contener letras.");
             }
-
+            if (estado != "0" && estado != "1")
+            {
+                throw new ArgumentException("El estado debe ser '0' o '1'.");
+            }
             // Si todas las validaciones son exitosas, retornamos true
             return true;
         }
