@@ -13,6 +13,7 @@ namespace canchacubo
 {
     public partial class validareserva : Form
     {
+             
         DateTime fecha;
         string hora;
         int cancha;
@@ -22,25 +23,15 @@ namespace canchacubo
             this.hora = hora;
             this.cancha = cancha;
             InitializeComponent();
+           
         }
 
         private void btn_volver_Click(object sender, EventArgs e)
         {
             reservas reserva = new reservas();
             reserva.Show();
-            this.Hide();
+            this.Close();
         }
-
-        private void txt_id_cliente_TextChanged(object sender, EventArgs e)
-        {
-          
-        }
-
-        private void validareserva_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void registrar_Click(object sender, EventArgs e)
         {
              string id_cliente = txt_id_cliente.Text;

@@ -31,7 +31,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.btn_volver = new System.Windows.Forms.Button();
-            this.btn_eliminarcliente = new System.Windows.Forms.Button();
             this.btn_editarcliente = new System.Windows.Forms.Button();
             this.btn_consultarcliente = new System.Windows.Forms.Button();
             this.btn_crearcliente = new System.Windows.Forms.Button();
@@ -67,21 +66,10 @@
             this.btn_volver.UseVisualStyleBackColor = true;
             this.btn_volver.Click += new System.EventHandler(this.btn_volver_Click);
             // 
-            // btn_eliminarcliente
-            // 
-            this.btn_eliminarcliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_eliminarcliente.Location = new System.Drawing.Point(101, 301);
-            this.btn_eliminarcliente.Name = "btn_eliminarcliente";
-            this.btn_eliminarcliente.Size = new System.Drawing.Size(107, 43);
-            this.btn_eliminarcliente.TabIndex = 6;
-            this.btn_eliminarcliente.Text = "Eliminar";
-            this.btn_eliminarcliente.UseVisualStyleBackColor = true;
-            this.btn_eliminarcliente.Click += new System.EventHandler(this.btn_eliminarcliente_Click);
-            // 
             // btn_editarcliente
             // 
             this.btn_editarcliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_editarcliente.Location = new System.Drawing.Point(101, 224);
+            this.btn_editarcliente.Location = new System.Drawing.Point(101, 265);
             this.btn_editarcliente.Name = "btn_editarcliente";
             this.btn_editarcliente.Size = new System.Drawing.Size(107, 43);
             this.btn_editarcliente.TabIndex = 7;
@@ -92,13 +80,13 @@
             // btn_consultarcliente
             // 
             this.btn_consultarcliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_consultarcliente.Location = new System.Drawing.Point(101, 165);
+            this.btn_consultarcliente.Location = new System.Drawing.Point(101, 187);
             this.btn_consultarcliente.Name = "btn_consultarcliente";
             this.btn_consultarcliente.Size = new System.Drawing.Size(107, 43);
             this.btn_consultarcliente.TabIndex = 8;
             this.btn_consultarcliente.Text = "Consultar";
             this.btn_consultarcliente.UseVisualStyleBackColor = true;
-            this.btn_consultarcliente.Click += new System.EventHandler(this.button4_Click);
+            this.btn_consultarcliente.Click += new System.EventHandler(this.btn_consultar_Click);
             // 
             // btn_crearcliente
             // 
@@ -120,7 +108,6 @@
             this.Controls.Add(this.btn_crearcliente);
             this.Controls.Add(this.btn_consultarcliente);
             this.Controls.Add(this.btn_editarcliente);
-            this.Controls.Add(this.btn_eliminarcliente);
             this.Controls.Add(this.btn_volver);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label1);
@@ -136,7 +123,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btn_volver;
-        private System.Windows.Forms.Button btn_eliminarcliente;
         private System.Windows.Forms.Button btn_editarcliente;
         private System.Windows.Forms.Button btn_consultarcliente;
         private System.Windows.Forms.Button btn_crearcliente;

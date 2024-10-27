@@ -16,14 +16,14 @@ namespace canchacubo.clases
         string cadenaConexion = "Data Source = localhost; User ID = MY_USER;Password=USER654321";
         public clsCliente()
         { }
-        public void insertar_cliente(string cedula, string nombre, string telefono, string estado)
+
+        public bool InsertarCliente(string cedula, string nombre, string telefono, string estado)
         {
             try
             {
-                // Intentamos validar los datos antes de insertar
+                // Validación de datos antes de insertar
                 if (ValidarDatosCliente(cedula, nombre, telefono, estado))
                 {
-                    // Si la validación es exitosa, procedemos con la inserción
                     using (OracleConnection connection = new OracleConnection(cadenaConexion))
                     {
                         OracleCommand command = new OracleCommand();
@@ -38,19 +38,25 @@ namespace canchacubo.clases
 
                         connection.Open();
                         command.ExecuteNonQuery();
-
-                        // Mostramos un mensaje en caso de éxito
-                        MessageBox.Show("Cliente registrado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+                    // Retorna true si la inserción fue exitosa
+                    return true;
+                }
+                else
+                {
+                    // Datos no válidos; retorna false
+                    return false;
                 }
             }
             catch (ArgumentException ex)
             {
-                // Mostramos un MessageBox con el mensaje de validación si hay un error
+                // Manejo de excepción de validación
                 MessageBox.Show(ex.Message, "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
             catch (OracleException ex)
             {
+                // Manejo de errores específicos de Oracle
                 switch (ex.Number)
                 {
                     case 20001:
@@ -69,7 +75,7 @@ namespace canchacubo.clases
                         MessageBox.Show("Error: El nombre solo debe contener letras.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     case 20006:
-                        MessageBox.Show("Error: El estado solo puede ser el número 0 o 1", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Error: El estado solo puede ser el número 0 o 1.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     case 20008:
                         MessageBox.Show("Error: El ID ya está registrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -78,14 +84,15 @@ namespace canchacubo.clases
                         MessageBox.Show("Error al registrar el cliente: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
+                return false;
             }
             catch (Exception ex)
             {
                 // Manejo de cualquier otra excepción
                 MessageBox.Show("Error al registrar el cliente: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
-
         public void consultar_cliente(string idCliente)
         {
             try
@@ -203,7 +210,6 @@ namespace canchacubo.clases
                 MessageBox.Show("Error al actualizar el cliente: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         public bool ValidarDatosCliente(string cedula, string nombre, string telefono, string estado)
         {
             if (!Regex.IsMatch(cedula, @"^\d+$"))
@@ -255,6 +261,34 @@ namespace canchacubo.clases
         {
             MessageBox.Show(mensaje, "Resultado de la Consulta", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-      
+        
+        public DataTable obtenerTablaClientes()
+        {
+            DataTable dtclientes = new DataTable();
+            using (OracleConnection connection = new OracleConnection(cadenaConexion))
+            {
+                OracleCommand command = new OracleCommand();
+                command.Connection = connection;
+                command.CommandText = "bdcanchascubo.OBTENER_CLIENTES";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("p_cursor", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+                try
+                {
+                    connection.Open();
+
+                    using (OracleDataAdapter adapter = new OracleDataAdapter(command))
+                    {
+                        DataSet dataSet = new DataSet();
+                        adapter.Fill(dtclientes);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cargar los datos: " + ex.Message);
+                }
+            }
+            return dtclientes;
+
+        }
     }
 }

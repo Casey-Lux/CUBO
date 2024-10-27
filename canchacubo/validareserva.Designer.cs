@@ -68,15 +68,16 @@
             // txt_id_cliente
             // 
             this.txt_id_cliente.Location = new System.Drawing.Point(173, 124);
+            this.txt_id_cliente.MaxLength = 10;
             this.txt_id_cliente.Name = "txt_id_cliente";
             this.txt_id_cliente.Size = new System.Drawing.Size(155, 20);
-            this.txt_id_cliente.TabIndex = 3;
-            this.txt_id_cliente.TextChanged += new System.EventHandler(this.txt_id_cliente_TextChanged);
+            this.txt_id_cliente.TabIndex = 3;         
             // 
             // cbx_promociones
             // 
             this.cbx_promociones.FormattingEnabled = true;
             this.cbx_promociones.Location = new System.Drawing.Point(173, 183);
+            this.cbx_promociones.MaxLength = 10;
             this.cbx_promociones.Name = "cbx_promociones";
             this.cbx_promociones.Size = new System.Drawing.Size(155, 21);
             this.cbx_promociones.TabIndex = 4;
@@ -117,8 +118,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "validareserva";
-            this.Text = "Form3";
-            this.Load += new System.EventHandler(this.validareserva_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

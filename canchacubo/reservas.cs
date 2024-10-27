@@ -17,18 +17,18 @@ namespace canchacubo
         public reservas()
         {
             InitializeComponent();
-           
-            
+
+
         }
 
 
-       
+
         private void Form2_Load(object sender, EventArgs e)
         {
 
         }
 
-      
+
 
         private void btnvolver_Click(object sender, EventArgs e)
         {
@@ -51,10 +51,10 @@ namespace canchacubo
 
         private void cancha1_Click(object sender, EventArgs e)
         {
-             canchaSeleccionada = 1;
+            canchaSeleccionada = 1;
             QuitarBordes();
             cancha1.BorderStyle = BorderStyle.Fixed3D;
-         
+
         }
 
         private void cancha2_Click(object sender, EventArgs e)
@@ -85,7 +85,7 @@ namespace canchacubo
             cancha5.BorderStyle = BorderStyle.Fixed3D;
         }
         private void QuitarBordes()
-        { 
+        {
             cancha1.BorderStyle = BorderStyle.None;
             cancha2.BorderStyle = BorderStyle.None;
             cancha3.BorderStyle = BorderStyle.None;
@@ -100,18 +100,17 @@ namespace canchacubo
                 MessageBox.Show("Por favor, seleccione una opción para la hora.", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            DateTime fechaSeleccionada = txt_fecha.Value.Date;
-            if (fechaSeleccionada == txt_fecha.MinDate)
+            DateTime fechaSeleccionada = txt_fecha.Value.Date;//obtener solo la fecha
+            if (txt_fecha.Checked==false)
             {
-                fechaSeleccionada = DateTime.Now.Date;
+                fechaSeleccionada = DateTime.Today;
             }
             if (canchaSeleccionada == 0)
             {
                 MessageBox.Show("Por favor, seleccione una cancha.", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            string hora = cbx_horario.SelectedItem.ToString();
-            string fecha = txt_fecha.Text;
+            string hora = cbx_horario.SelectedItem.ToString(); // ontener la hora y convertirla en froma  datetime          
             validareserva objeto = new validareserva(fechaSeleccionada, hora,canchaSeleccionada);
             objeto.Show();
             this.Hide();

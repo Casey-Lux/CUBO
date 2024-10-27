@@ -13,6 +13,7 @@ namespace canchacubo
 {
     public partial class editarcliente : Form
     {
+        public event EventHandler ClienteModificado;
         public editarcliente()
         {
             InitializeComponent();
@@ -24,12 +25,6 @@ namespace canchacubo
             clientes.Show(); // 
             this.Hide();
         }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btn_crearcliente_Click(object sender, EventArgs e)
         {
             String nombre = txtt_nombre.Text;
@@ -45,6 +40,7 @@ namespace canchacubo
             }
             clsCliente cliente_obj = new clsCliente();
             cliente_obj.EditarCliente(identificacion, nombre, telefono, estado);
+            ClienteModificado?.Invoke(this, EventArgs.Empty);
         }
     }
 }

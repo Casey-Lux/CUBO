@@ -127,12 +127,6 @@
     <Compile Include="editarpromocion.Designer.cs">
       <DependentUpon>editarpromocion.cs</DependentUpon>
     </Compile>
-    <Compile Include="eliminarcliente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="eliminarcliente.Designer.cs">
-      <DependentUpon>eliminarcliente.cs</DependentUpon>
-    </Compile>
     <Compile Include="eliminarpromocion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,9 +191,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="editarpromocion.resx">
       <DependentUpon>editarpromocion.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="eliminarcliente.resx">
-      <DependentUpon>eliminarcliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="eliminarpromocion.resx">
       <DependentUpon>eliminarpromocion.cs</DependentUpon>

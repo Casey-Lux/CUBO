@@ -1,6 +1,7 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Data;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -9,20 +10,13 @@ namespace canchacubo.clases
     internal class clsReserva
     {
         string cadenaConexion = "Data Source = localhost; User ID = MY_USER;Password=USER654321";
-        int estado = 1;
-
+        int estado = 1;         
         public void Registrar_Reserva(DateTime fecha, string horaSeleccionada, string id_cliente, int num_cancha)
         {
             try
             {
-                // Validamos los datos usando el método validar_reserva
                 if (validar_reserva(fecha, horaSeleccionada, id_cliente, num_cancha))
                 {
-                    DateTime horaInicio;
-                    // Convertimos la hora seleccionada a un DateTime con valores ficticios para año, mes y día
-                    DateTime.TryParse(horaSeleccionada, out horaInicio);
-                    horaInicio = new DateTime(1, 1, 1, horaInicio.Hour, horaInicio.Minute, 0);
-
                     using (OracleConnection connection = new OracleConnection(cadenaConexion))
                     {
                         OracleCommand command = new OracleCommand();
@@ -32,7 +26,7 @@ namespace canchacubo.clases
 
                         // Agregamos los parámetros requeridos por el procedimiento almacenado
                         command.Parameters.Add("p_fecha", OracleDbType.Date).Value = fecha;
-                        command.Parameters.Add("p_horai", OracleDbType.Date).Value = horaInicio;
+                        command.Parameters.Add("p_horai", OracleDbType.Varchar2).Value = horaSeleccionada;
                         command.Parameters.Add("p_cliente", OracleDbType.Decimal).Value = id_cliente;
                         command.Parameters.Add("p_estado", OracleDbType.Decimal).Value = estado; // Asegúrate de definir este valor
                         command.Parameters.Add("p_cancha", OracleDbType.Decimal).Value = num_cancha;
@@ -70,6 +64,7 @@ namespace canchacubo.clases
 
                         if (result == DialogResult.Yes)
                         {
+                           
                             crearcliente cliente = new crearcliente();
                             cliente.Show(); // Redirigimos al formulario de creación de cliente
                         }
@@ -90,7 +85,7 @@ namespace canchacubo.clases
         }
 
         public bool validar_reserva(DateTime fecha, string horaSeleccionada, string id_cliente, int num_cancha)
-        {
+        {           
             if (!Regex.IsMatch(id_cliente, @"^\d+$"))
             {
                 throw new ArgumentException("La cédula debe ser un número válido. Inténtalo de nuevo.");
@@ -104,10 +99,14 @@ namespace canchacubo.clases
             {
                 throw new ArgumentException("La hora de la reserva debe estar entre las 12:00 y las 23:00 horas.");
             }
-            if (fecha < DateTime.Now)
+
+            DateTime fechaHoraSeleccionada = new DateTime(fecha.Year, fecha.Month, fecha.Day, horaInicio.Hour, horaInicio.Minute,0);
+            // Validar si la fecha y hora seleccionadas son menores a la fecha y hora actual
+            if (fechaHoraSeleccionada < DateTime.Now)
             {
-                throw new ArgumentException("La fecha de la reserva no puede ser anterior a la fecha actual.");
+                throw new ArgumentException("La fecha y hora de la reserva no puede ser anterior a la fecha actual.");
             }
+            
             if (num_cancha < 1 || num_cancha > 5)
             {
                 throw new ArgumentException("El número de cancha debe estar entre 1 y 5.");

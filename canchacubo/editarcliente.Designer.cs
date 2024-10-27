@@ -111,11 +111,11 @@
             this.label2.Size = new System.Drawing.Size(103, 20);
             this.label2.TabIndex = 19;
             this.label2.Text = "Identificacion";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // txt_estado
             // 
             this.txt_estado.Location = new System.Drawing.Point(132, 276);
+            this.txt_estado.MaxLength = 1;
             this.txt_estado.Name = "txt_estado";
             this.txt_estado.Size = new System.Drawing.Size(138, 20);
             this.txt_estado.TabIndex = 18;
@@ -123,6 +123,7 @@
             // txt_telefono
             // 
             this.txt_telefono.Location = new System.Drawing.Point(132, 213);
+            this.txt_telefono.MaxLength = 10;
             this.txt_telefono.Name = "txt_telefono";
             this.txt_telefono.Size = new System.Drawing.Size(138, 20);
             this.txt_telefono.TabIndex = 17;
@@ -130,6 +131,7 @@
             // txtt_nombre
             // 
             this.txtt_nombre.Location = new System.Drawing.Point(132, 166);
+            this.txtt_nombre.MaxLength = 20;
             this.txtt_nombre.Name = "txtt_nombre";
             this.txtt_nombre.Size = new System.Drawing.Size(138, 20);
             this.txtt_nombre.TabIndex = 16;
@@ -137,6 +139,7 @@
             // txt_identificacion
             // 
             this.txt_identificacion.Location = new System.Drawing.Point(132, 114);
+            this.txt_identificacion.MaxLength = 10;
             this.txt_identificacion.Name = "txt_identificacion";
             this.txt_identificacion.Size = new System.Drawing.Size(138, 20);
             this.txt_identificacion.TabIndex = 15;

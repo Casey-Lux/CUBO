@@ -1,4 +1,5 @@
-﻿using System;
+﻿using canchacubo.clases;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,10 +15,10 @@ namespace canchacubo
     {
         public cliente()
         {
-            InitializeComponent();
+            InitializeComponent();          
         }
-
-        private void button4_Click(object sender, EventArgs e)
+        clsCliente obj_cliente = new clsCliente();
+        private void btn_consultar_Click(object sender, EventArgs e)
         {
             consultarcliente cliente = new consultarcliente();
             cliente.Show();
@@ -28,29 +29,35 @@ namespace canchacubo
         {
             principal objeto = new principal();
             objeto.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void btn_crearcliente_Click(object sender, EventArgs e)
         {
-            crearcliente cliente = new crearcliente();
-            cliente.Show();
-            this.Hide();
+            crearcliente Form_cliente = new crearcliente();
+            Form_cliente.ClienteRegistrado += RefrescarListaClientees;
+            Form_cliente.Show();
+                       
         }
 
         private void btn_editarcliente_Click(object sender, EventArgs e)
+        {            
+            editarcliente Form_cliente = new editarcliente();
+            Form_cliente.ClienteModificado += RefrescarListaClientees;
+            Form_cliente.Show();
+            this.Close();
+        }     
+       
+        public void RefrescarListaClientees(object sender, EventArgs e)
         {
-            editarcliente cliente = new editarcliente();
-            cliente.Show();
-            this.Hide();
-
-        }
-
-        private void btn_eliminarcliente_Click(object sender, EventArgs e)
-        {
-            eliminarcliente cliente = new eliminarcliente();
-            cliente.Show();
-            this.Hide();
+            try
+            {
+                DataTable dtclientes = obj_cliente.obtenerTablaClientes();              
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al recargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
