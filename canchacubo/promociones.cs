@@ -47,9 +47,7 @@ namespace canchacubo
 
         private void btn_eliminar_Click(object sender, EventArgs e)
         {
-            eliminarcliente cliente = new eliminarcliente();
-            cliente.Show();
-            this.Hide();
+           
         }
     }
 }
