@@ -39,6 +39,7 @@
             this.txt_telefono = new System.Windows.Forms.TextBox();
             this.txtt_nombre = new System.Windows.Forms.TextBox();
             this.txt_identificacion = new System.Windows.Forms.TextBox();
+            this.btn_editar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -53,9 +54,10 @@
             // 
             // btn_volver
             // 
-            this.btn_volver.Location = new System.Drawing.Point(713, 406);
+            this.btn_volver.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_volver.Location = new System.Drawing.Point(648, 356);
             this.btn_volver.Name = "btn_volver";
-            this.btn_volver.Size = new System.Drawing.Size(75, 23);
+            this.btn_volver.Size = new System.Drawing.Size(99, 33);
             this.btn_volver.TabIndex = 5;
             this.btn_volver.Text = "VOLVER";
             this.btn_volver.UseVisualStyleBackColor = true;
@@ -64,7 +66,7 @@
             // btn_crearcliente
             // 
             this.btn_crearcliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_crearcliente.Location = new System.Drawing.Point(413, 318);
+            this.btn_crearcliente.Location = new System.Drawing.Point(132, 356);
             this.btn_crearcliente.Name = "btn_crearcliente";
             this.btn_crearcliente.Size = new System.Drawing.Size(96, 32);
             this.btn_crearcliente.TabIndex = 23;
@@ -144,12 +146,24 @@
             this.txt_identificacion.Size = new System.Drawing.Size(138, 20);
             this.txt_identificacion.TabIndex = 15;
             // 
+            // btn_editar
+            // 
+            this.btn_editar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_editar.Location = new System.Drawing.Point(450, 106);
+            this.btn_editar.Name = "btn_editar";
+            this.btn_editar.Size = new System.Drawing.Size(102, 28);
+            this.btn_editar.TabIndex = 24;
+            this.btn_editar.Text = "EDITAR";
+            this.btn_editar.UseVisualStyleBackColor = true;
+            this.btn_editar.Click += new System.EventHandler(this.btn_editar_Click);
+            // 
             // editarcliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::canchacubo.Properties.Resources.fondo;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_editar);
             this.Controls.Add(this.btn_crearcliente);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -181,5 +195,6 @@
         private System.Windows.Forms.TextBox txt_telefono;
         private System.Windows.Forms.TextBox txtt_nombre;
         private System.Windows.Forms.TextBox txt_identificacion;
+        private System.Windows.Forms.Button btn_editar;
     }
 }

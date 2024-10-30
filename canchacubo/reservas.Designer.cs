@@ -231,7 +231,6 @@
             this.Controls.Add(this.label1);
             this.Name = "reservas";
             this.Text = "Form2";
-            this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.cancha1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cancha2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cancha3)).EndInit();

@@ -33,7 +33,7 @@ namespace canchacubo
                 MessageBox.Show("La cédula no puede estar vacía. Inténtalo de nuevo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            cliente_obj.consultar_cliente(idCliente);
+           Boolean resultado=cliente_obj.ConsultarCliente(idCliente);
 
         }
 

@@ -93,14 +93,14 @@ namespace canchacubo.clases
                 return false;
             }
         }
-        public void consultar_cliente(string idCliente)
+        public bool ConsultarCliente(string idCliente)
         {
             try
             {
-                // Validamos el ID del cliente antes de realizar la consulta
+                // Validación del ID del cliente antes de la consulta
                 if (!ValidarIdCliente(idCliente))
                 {
-                    return; // Si la validación falla, mostramos un mensaje en el método ValidarIdCliente y detenemos la ejecución
+                    return false; // Si la validación falla, detenemos la ejecución
                 }
 
                 using (OracleConnection connection = new OracleConnection(cadenaConexion))
@@ -131,16 +131,23 @@ namespace canchacubo.clases
                         MostrarResultado("Cliente no encontrado. Verifica la identificación.");
                     }
                 }
+                // Retorna true si la consulta fue exitosa y se encontraron datos
+                return true;
             }
             catch (OracleException ex)
             {
+                // Manejo de errores específicos de Oracle
                 MostrarResultado("Error al consultar el cliente: " + ex.Message);
+                return false;
             }
             catch (Exception ex)
             {
+                // Manejo de cualquier otra excepción
                 MostrarResultado("Error inesperado: " + ex.Message);
+                return false;
             }
         }
+
         public void EditarCliente(string idCliente, string nuevoNombre, string nuevoTelefono, string nuevoEstado)
         {
             try
