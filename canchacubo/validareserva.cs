@@ -30,6 +30,7 @@ namespace canchacubo
         {
             reservas reserva = new reservas();
             reserva.Show();
+            reserva.EjecutarDisponibilidad();
             this.Close();
         }
         private void registrar_Click(object sender, EventArgs e)
@@ -41,7 +42,7 @@ namespace canchacubo
                 return;
             }
             clsReserva reserva_obj = new clsReserva();
-            reserva_obj.Registrar_Reserva(fecha, hora, id_cliente, cancha);
+            reserva_obj.Registrar_Reserva(fecha, hora, id_cliente, cancha);                           
         }
     }
 }

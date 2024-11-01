@@ -10,7 +10,7 @@ namespace canchacubo.clases
     internal class clsReserva
     {
         string cadenaConexion = "Data Source = localhost; User ID = MY_USER;Password=USER654321";
-        int estado = 1;         
+        int estado = 1;
         public void Registrar_Reserva(DateTime fecha, string horaSeleccionada, string id_cliente, int num_cancha)
         {
             try
@@ -64,7 +64,7 @@ namespace canchacubo.clases
 
                         if (result == DialogResult.Yes)
                         {
-                           
+
                             crearcliente cliente = new crearcliente();
                             cliente.Show(); // Redirigimos al formulario de creación de cliente
                         }
@@ -83,7 +83,7 @@ namespace canchacubo.clases
                 MessageBox.Show("Error al registrar la reserva: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-       
+
 
         public bool EliminarReserva(DateTime fechaSeleccionada, string hora, int canchaSeleccionada)
         {
@@ -109,7 +109,7 @@ namespace canchacubo.clases
 
                     // Ejecutamos la consulta
                     connection.Open();
-                    command.ExecuteNonQuery();                   
+                    command.ExecuteNonQuery();
                 }
 
                 // Retorna true si la eliminación fue exitosa
@@ -159,7 +159,7 @@ namespace canchacubo.clases
                 throw new ArgumentException("La hora de la reserva debe estar entre las 12:00 y las 23:00 horas.");
             }
 
-            DateTime fechaHoraSeleccionada = new DateTime(fecha.Year, fecha.Month, fecha.Day, horaInicio.Hour, horaInicio.Minute, 0);           
+            DateTime fechaHoraSeleccionada = new DateTime(fecha.Year, fecha.Month, fecha.Day, horaInicio.Hour, horaInicio.Minute, 0);
             if (fechaHoraSeleccionada < DateTime.Now)
             {
                 throw new ArgumentException("La fecha y hora de la reserva no puede ser anterior a la fecha actual.");
@@ -172,9 +172,9 @@ namespace canchacubo.clases
 
             return true;
         }
-        public bool validar_eliminarReserva(DateTime fecha, string horaSeleccionada,  int num_cancha)
+        public bool validar_eliminarReserva(DateTime fecha, string horaSeleccionada, int num_cancha)
         {
-            
+
             DateTime horaInicio;
             if (!DateTime.TryParse(horaSeleccionada, out horaInicio))
             {
@@ -199,35 +199,27 @@ namespace canchacubo.clases
 
             return true;
         }
-        
-      public DataTable ObtenerTablaReservas()
+        public DataTable ObtenerTablaReservas()
         {
-            DataTable dtclientes = new DataTable();
-            using (OracleConnection connection = new OracleConnection(cadenaConexion))
+            using (OracleConnection conn = new OracleConnection(cadenaConexion))
             {
-                OracleCommand command = new OracleCommand();
-                command.Connection = connection;
-                command.CommandText = "bdcanchascubo.OBTENER_RESERVAS";
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add("p_cursor", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
-                try
-                {
-                    connection.Open();
+                conn.Open();
 
-                    using (OracleDataAdapter adapter = new OracleDataAdapter(command))
+                using (OracleCommand cmd = new OracleCommand("bdcanchascubo.OBTENER_RESERVAS", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("p_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+
+                    using (OracleDataAdapter da = new OracleDataAdapter(cmd))
                     {
-                        DataSet dataSet = new DataSet();
-                        adapter.Fill(dtclientes);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        return dt;
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al cargar los datos: " + ex.Message);
-                }
             }
-            return dtclientes;
 
         }
-
+       
     }
 }

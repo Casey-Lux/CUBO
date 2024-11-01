@@ -52,7 +52,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(257, 9);
+            this.label1.Location = new System.Drawing.Point(351, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(111, 25);
             this.label1.TabIndex = 0;
@@ -91,11 +91,12 @@
             this.cbx_horario.Name = "cbx_horario";
             this.cbx_horario.Size = new System.Drawing.Size(100, 21);
             this.cbx_horario.TabIndex = 1;
+            this.cbx_horario.SelectedIndexChanged += new System.EventHandler(this.cbx_horario_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(582, 90);
+            this.label2.Location = new System.Drawing.Point(553, 96);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 3;
@@ -205,10 +206,11 @@
             // 
             // txt_fecha
             // 
-            this.txt_fecha.Location = new System.Drawing.Point(366, 90);
+            this.txt_fecha.Location = new System.Drawing.Point(332, 90);
             this.txt_fecha.Name = "txt_fecha";
             this.txt_fecha.Size = new System.Drawing.Size(200, 20);
             this.txt_fecha.TabIndex = 26;
+            this.txt_fecha.ValueChanged += new System.EventHandler(this.txt_fecha_ValueChanged);
             // 
             // reservas
             // 
