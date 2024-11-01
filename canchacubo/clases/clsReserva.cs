@@ -99,7 +99,7 @@ namespace canchacubo.clases
                 {
                     OracleCommand command = new OracleCommand();
                     command.Connection = connection;
-                    command.CommandText = "bdcanchascubo.eliminar_reserva"; // Nota: corregido el nombre del procedimiento
+                    command.CommandText = "bdcanchascubo.ELIMINAR_RESERVA"; // Nota: corregido el nombre del procedimiento
                     command.CommandType = CommandType.StoredProcedure;
 
                     // Agregamos los parámetros requeridos por el procedimiento almacenado
@@ -187,7 +187,7 @@ namespace canchacubo.clases
             }
 
             DateTime fechaHoraSeleccionada = new DateTime(fecha.Year, fecha.Month, fecha.Day, horaInicio.Hour, horaInicio.Minute, 0);
-            if (fechaHoraSeleccionada > DateTime.Now)
+            if (fechaHoraSeleccionada < DateTime.Now)
             {
                 throw new ArgumentException("No es posible eliminar una reserva que ha caducado.");
             }
