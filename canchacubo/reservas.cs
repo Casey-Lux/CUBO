@@ -19,6 +19,7 @@ namespace canchacubo
         public event EventHandler ReservaGestionada;
         string colorverde = "#80ee0c";
         string colorrojo = "#ee430c";
+        int borderSize = 8;
         private readonly Timer disponibilidadTimer = new Timer();
 
         public reservas()
@@ -30,8 +31,7 @@ namespace canchacubo
 
         }
         private void reservas_Load(object sender, EventArgs e)
-        {
-            RecargarDatosReservas();
+        {            
             EjecutarDisponibilidad();
             disponibilidadTimer.Start();
         }
@@ -142,6 +142,7 @@ namespace canchacubo
         }
         public void EjecutarDisponibilidad()
         {
+            RecargarDatosReservas();
             DateTime fechaActual = obtenerFechaideal();
             string horaActual = obtenerHoraIdeal();
             List<PictureBox> numeroCanchas = new List<PictureBox> { cancha1, cancha2, cancha3, cancha4, cancha5 };
@@ -184,9 +185,7 @@ namespace canchacubo
             return false;
         }
         private void MostrarCanchaDisponible(object sender, PaintEventArgs e)
-        {
-
-            int borderSize = 8;
+        {            
             Color borderColor = ColorTranslator.FromHtml(colorverde); ;
 
             using (Pen pen = new Pen(borderColor, borderSize))
@@ -196,8 +195,6 @@ namespace canchacubo
         }
         private void MostrarCanchaNoDisponible(object sender, PaintEventArgs e)
         {
-
-            int borderSize = 8;
             Color borderColor = ColorTranslator.FromHtml(colorrojo); ;
 
             using (Pen pen = new Pen(borderColor, borderSize))

@@ -60,7 +60,7 @@
             // btn_eliminar
             // 
             this.btn_eliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_eliminar.Location = new System.Drawing.Point(98, 321);
+            this.btn_eliminar.Location = new System.Drawing.Point(89, 320);
             this.btn_eliminar.Name = "btn_eliminar";
             this.btn_eliminar.Size = new System.Drawing.Size(146, 37);
             this.btn_eliminar.TabIndex = 10;
@@ -71,7 +71,7 @@
             // btn_editar
             // 
             this.btn_editar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_editar.Location = new System.Drawing.Point(98, 257);
+            this.btn_editar.Location = new System.Drawing.Point(89, 256);
             this.btn_editar.Name = "btn_editar";
             this.btn_editar.Size = new System.Drawing.Size(146, 37);
             this.btn_editar.TabIndex = 11;
@@ -93,7 +93,7 @@
             // btn_crear
             // 
             this.btn_crear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_crear.Location = new System.Drawing.Point(74, 107);
+            this.btn_crear.Location = new System.Drawing.Point(89, 109);
             this.btn_crear.Name = "btn_crear";
             this.btn_crear.Size = new System.Drawing.Size(146, 37);
             this.btn_crear.TabIndex = 13;

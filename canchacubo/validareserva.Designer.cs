@@ -71,7 +71,7 @@
             this.txt_id_cliente.MaxLength = 10;
             this.txt_id_cliente.Name = "txt_id_cliente";
             this.txt_id_cliente.Size = new System.Drawing.Size(155, 20);
-            this.txt_id_cliente.TabIndex = 3;         
+            this.txt_id_cliente.TabIndex = 3;
             // 
             // cbx_promociones
             // 
@@ -81,6 +81,7 @@
             this.cbx_promociones.Name = "cbx_promociones";
             this.cbx_promociones.Size = new System.Drawing.Size(155, 21);
             this.cbx_promociones.TabIndex = 4;
+            this.cbx_promociones.SelectedIndexChanged += new System.EventHandler(this.cbx_promociones_SelectedIndexChanged);
             // 
             // registrar
             // 

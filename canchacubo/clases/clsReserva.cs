@@ -11,12 +11,13 @@ namespace canchacubo.clases
     {
         string cadenaConexion = "Data Source = localhost; User ID = MY_USER;Password=USER654321";
         int estado = 1;
-        public void Registrar_Reserva(DateTime fecha, string horaSeleccionada, string id_cliente, int num_cancha)
+        public bool Registrar_Reserva(DateTime fecha, string horaSeleccionada, string id_cliente, int num_cancha)
         {
             try
             {
                 if (validar_reserva(fecha, horaSeleccionada, id_cliente, num_cancha))
                 {
+
                     using (OracleConnection connection = new OracleConnection(cadenaConexion))
                     {
                         OracleCommand command = new OracleCommand();
@@ -34,14 +35,20 @@ namespace canchacubo.clases
                         // Ejecutamos la consulta
                         connection.Open();
                         command.ExecuteNonQuery();
-                        MessageBox.Show("Reserva registrada", "Registro Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                     }
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
             catch (ArgumentException ex)
             {
                 // Capturamos los errores de validación desde el método validar_reserva
                 MessageBox.Show(ex.Message, "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
             catch (OracleException ex)
             {
@@ -76,15 +83,14 @@ namespace canchacubo.clases
                         MessageBox.Show("Error al registrar la reserva: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
+                return false;
             }
             catch (Exception ex)
-            {
-                // Capturamos cualquier otro tipo de error
+            {                
                 MessageBox.Show("Error al registrar la reserva: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
-
-
         public bool EliminarReserva(DateTime fechaSeleccionada, string hora, int canchaSeleccionada)
         {
             try
