@@ -21,7 +21,7 @@ namespace canchacubo
         string colorrojo = "#ee430c";
         int borderSize = 8;
         private readonly Timer disponibilidadTimer = new Timer();
-
+        List<(int canchas, bool estado)> canchasdisponibles = new List<(int, bool)>();
         public reservas()
         {
             InitializeComponent();
@@ -122,6 +122,14 @@ namespace canchacubo
                 MessageBox.Show("Por favor, seleccione una cancha.", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            
+            bool estadocancha = canchasdisponibles.FirstOrDefault(p => p.canchas == canchaSeleccionada).estado;
+            if (estadocancha)
+            {
+                MessageBox.Show("ya existe una reserva para esta cancha en el mismo horario.", "Error ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             string hora = cbx_horario.SelectedItem.ToString(); // ontener la hora y convertirla en froma  datetime          
             validareserva objeto = new validareserva(fechaSeleccionada, hora, canchaSeleccionada);
             objeto.Show();
@@ -161,10 +169,12 @@ namespace canchacubo
 
                 if (reservaExiste)
                 {
+                    canchasdisponibles.Add((numeroCancha, true));
                     canchas[i].Paint += MostrarCanchaNoDisponible;
                 }
                 else
                 {
+                    canchasdisponibles.Add((numeroCancha, false));
                     canchas[i].Paint += MostrarCanchaDisponible;
                 }
             }
@@ -201,28 +211,33 @@ namespace canchacubo
             {
                 e.Graphics.DrawRectangle(pen, new Rectangle(0, 0, ((PictureBox)sender).Width - 1, ((PictureBox)sender).Height - 1));
             }
-        }     
+        }
         private string obtenerHoraIdeal()
         {
+            // Si no hay una selección en el ComboBox
             if (cbx_horario.SelectedIndex == -1)
             {
-                  DateTime ahora = DateTime.Now;
-                 TimeSpan doceDelMediodia = new TimeSpan(12, 0, 0);
+                DateTime ahora = DateTime.Now;
+                TimeSpan doceDelMediodia = new TimeSpan(12, 0, 0);
 
-                 if (ahora.TimeOfDay < doceDelMediodia)
-                 {
+                if (ahora.TimeOfDay < doceDelMediodia)
+                {
+                    // Retorna "12:00" si la hora actual es antes de mediodía
                     return "12:00";
-                 }
-                 else
-                 {
+                }
+                else
+                {
+                    // Retorna la hora actual redondeada a la hora completa después de mediodía
                     return ahora.ToString("HH:00");
-                 }
-             }
-             else { 
-                        string hora = cbx_horario.SelectedItem.ToString();
-                        return hora;
-                  }
+                }
+            }
+            else
+            {
+                // Si el usuario seleccionó una hora, devuelve la hora seleccionada en el ComboBox
+                return cbx_horario.SelectedItem.ToString();
+            }
         }
+
         private DateTime obtenerFechaideal()
         {
             DateTime fechaSeleccionada = txt_fecha.Value.Date;//obtener solo la fecha

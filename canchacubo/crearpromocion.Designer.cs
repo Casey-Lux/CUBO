@@ -65,6 +65,7 @@
             // txt_descuento
             // 
             this.txt_descuento.Location = new System.Drawing.Point(118, 126);
+            this.txt_descuento.MaxLength = 10;
             this.txt_descuento.Name = "txt_descuento";
             this.txt_descuento.Size = new System.Drawing.Size(131, 20);
             this.txt_descuento.TabIndex = 6;
@@ -72,6 +73,7 @@
             // txt_estado
             // 
             this.txt_estado.Location = new System.Drawing.Point(118, 177);
+            this.txt_estado.MaxLength = 1;
             this.txt_estado.Name = "txt_estado";
             this.txt_estado.Size = new System.Drawing.Size(131, 20);
             this.txt_estado.TabIndex = 7;

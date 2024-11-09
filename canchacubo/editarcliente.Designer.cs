@@ -38,8 +38,8 @@
             this.txt_estado = new System.Windows.Forms.TextBox();
             this.txt_telefono = new System.Windows.Forms.TextBox();
             this.txtt_nombre = new System.Windows.Forms.TextBox();
-            this.txt_identificacion = new System.Windows.Forms.TextBox();
             this.btn_editar = new System.Windows.Forms.Button();
+            this.cbxclientes = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -70,7 +70,7 @@
             this.btn_crearcliente.Name = "btn_crearcliente";
             this.btn_crearcliente.Size = new System.Drawing.Size(96, 32);
             this.btn_crearcliente.TabIndex = 23;
-            this.btn_crearcliente.Text = "ENTER";
+            this.btn_crearcliente.Text = "EDITAR";
             this.btn_crearcliente.UseVisualStyleBackColor = true;
             this.btn_crearcliente.Click += new System.EventHandler(this.btn_crearcliente_Click);
             // 
@@ -138,24 +138,26 @@
             this.txtt_nombre.Size = new System.Drawing.Size(138, 20);
             this.txtt_nombre.TabIndex = 16;
             // 
-            // txt_identificacion
-            // 
-            this.txt_identificacion.Location = new System.Drawing.Point(132, 114);
-            this.txt_identificacion.MaxLength = 10;
-            this.txt_identificacion.Name = "txt_identificacion";
-            this.txt_identificacion.Size = new System.Drawing.Size(138, 20);
-            this.txt_identificacion.TabIndex = 15;
-            // 
             // btn_editar
             // 
             this.btn_editar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editar.Location = new System.Drawing.Point(450, 106);
             this.btn_editar.Name = "btn_editar";
-            this.btn_editar.Size = new System.Drawing.Size(102, 28);
+            this.btn_editar.Size = new System.Drawing.Size(127, 28);
             this.btn_editar.TabIndex = 24;
-            this.btn_editar.Text = "EDITAR";
+            this.btn_editar.Text = "CONSULTAR";
             this.btn_editar.UseVisualStyleBackColor = true;
             this.btn_editar.Click += new System.EventHandler(this.btn_editar_Click);
+            // 
+            // cbxclientes
+            // 
+            this.cbxclientes.FormattingEnabled = true;
+            this.cbxclientes.Location = new System.Drawing.Point(132, 111);
+            this.cbxclientes.MaxLength = 10;
+            this.cbxclientes.Name = "cbxclientes";
+            this.cbxclientes.Size = new System.Drawing.Size(138, 21);
+            this.cbxclientes.TabIndex = 25;
+            this.cbxclientes.SelectedIndexChanged += new System.EventHandler(this.cbxclientes_SelectedIndexChanged);
             // 
             // editarcliente
             // 
@@ -163,6 +165,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::canchacubo.Properties.Resources.fondo;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cbxclientes);
             this.Controls.Add(this.btn_editar);
             this.Controls.Add(this.btn_crearcliente);
             this.Controls.Add(this.label5);
@@ -172,7 +175,6 @@
             this.Controls.Add(this.txt_estado);
             this.Controls.Add(this.txt_telefono);
             this.Controls.Add(this.txtt_nombre);
-            this.Controls.Add(this.txt_identificacion);
             this.Controls.Add(this.btn_volver);
             this.Controls.Add(this.label1);
             this.Name = "editarcliente";
@@ -194,7 +196,7 @@
         private System.Windows.Forms.TextBox txt_estado;
         private System.Windows.Forms.TextBox txt_telefono;
         private System.Windows.Forms.TextBox txtt_nombre;
-        private System.Windows.Forms.TextBox txt_identificacion;
         private System.Windows.Forms.Button btn_editar;
+        private System.Windows.Forms.ComboBox cbxclientes;
     }
 }

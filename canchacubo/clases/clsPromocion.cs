@@ -1,5 +1,6 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -59,8 +60,14 @@ namespace canchacubo.clases
                         MessageBox.Show("Error: La duración de la promoción no puede exceder los 8 días.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     case 20003:                   
-                             MessageBox.Show(" Error: Ya existe una promoción activa con la misma informacion.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;                   
+                             MessageBox.Show(" Error: Ya existe una promoción activa con la misma este descuento.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break; 
+                   case 20005:
+                        MessageBox.Show("Error: la fecha inicial no puede ser anterior a la fecha actua.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 20006:
+                        MessageBox.Show("Error:El desceunto esta fuera de rango.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
                     default:
                         MessageBox.Show("Error al registrar la reserva: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;

@@ -11,11 +11,11 @@ namespace canchacubo.clases
     {
         string cadenaConexion = "Data Source = localhost; User ID = MY_USER;Password=USER654321";
         int estado = 1;
-        public bool Registrar_Reserva(DateTime fecha, string horaSeleccionada, string id_cliente, int num_cancha)
+        public bool Registrar_Reserva(DateTime fecha, string horaSeleccionada, string id_cliente, int num_cancha, Decimal idpromo)
         {
             try
             {
-                if (validar_reserva(fecha, horaSeleccionada, id_cliente, num_cancha))
+                if (validar_reserva(fecha, horaSeleccionada, id_cliente, num_cancha, idpromo))
                 {
 
                     using (OracleConnection connection = new OracleConnection(cadenaConexion))
@@ -31,7 +31,7 @@ namespace canchacubo.clases
                         command.Parameters.Add("p_cliente", OracleDbType.Decimal).Value = id_cliente;
                         command.Parameters.Add("p_estado", OracleDbType.Decimal).Value = estado; // Asegúrate de definir este valor
                         command.Parameters.Add("p_cancha", OracleDbType.Decimal).Value = num_cancha;
-
+                        command.Parameters.Add("p_promo", OracleDbType.Decimal).Value = idpromo;
                         // Ejecutamos la consulta
                         connection.Open();
                         command.ExecuteNonQuery();
@@ -149,7 +149,7 @@ namespace canchacubo.clases
             }
         }
 
-        public bool validar_reserva(DateTime fecha, string horaSeleccionada, string id_cliente, int num_cancha)
+        public bool validar_reserva(DateTime fecha, string horaSeleccionada, string id_cliente, int num_cancha,Decimal idpromo)
         {
             if (!Regex.IsMatch(id_cliente, @"^\d+$"))
             {
@@ -175,6 +175,9 @@ namespace canchacubo.clases
             {
                 throw new ArgumentException("El número de cancha debe estar entre 1 y 5.");
             }
+
+
+
 
             return true;
         }
