@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace canchacubo.clases
 {
+
     internal class clsPromocion
     {
         string cadenaConexion = "Data Source = localhost; User ID = MY_USER;Password=USER654321";
@@ -108,8 +109,7 @@ namespace canchacubo.clases
                 throw new ArgumentException("La fecha de finalizacion no puede anterior a la fecha de incio ");
             }
             return true;
-        }
-       
+        }       
         public DataTable ObtenerTablapPromociones()
         {
             using (OracleConnection conn = new OracleConnection(cadenaConexion))
@@ -130,6 +130,78 @@ namespace canchacubo.clases
                 }
             }
 
+        }
+        public bool EditarPromocion(String identificador,DateTime fechainicio, DateTime fechafin, string estado, string descuento)
+        {
+            try
+            {
+                if (validarPromocion(fechainicio, fechafin, estado, descuento))
+                {
+                    using (OracleConnection connection = new OracleConnection(cadenaConexion))
+                    {
+                        OracleCommand command = new OracleCommand();
+                        command.Connection = connection;
+                        command.CommandText = "bdcanchascubo.EDITAR_PROMOCION";
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        // Agregamos los parámetros requeridos por el procedimiento almacenado
+                        command.Parameters.Add("p_identificador", OracleDbType.Decimal).Value = identificador;
+                        command.Parameters.Add("p_descuento", OracleDbType.Decimal).Value = descuento;
+                        command.Parameters.Add("p_estado", OracleDbType.Decimal).Value = estado;
+                        command.Parameters.Add("p_fecha_inicio", OracleDbType.Date).Value = fechainicio;
+                        command.Parameters.Add("p_frecha_fin", OracleDbType.Date).Value = fechafin;
+
+
+                        // Ejecutamos la consulta
+                        connection.Open();
+                        command.ExecuteNonQuery();                        
+                    }
+                    return true;
+                }
+                else
+                {
+                    // Datos no válidos; retorna false
+                    return false;
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                // Capturamos los errores de validación desde el método validar_reserva
+                MessageBox.Show(ex.Message, "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            catch (OracleException ex)
+            {
+                // Manejo de errores específicos de Oracle
+                switch (ex.Number)
+                {
+                    case 20001:
+                        MessageBox.Show("Error: La Fecha_Fin no puede ser anterior a la Fecha_Inicio.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 20002:
+                        MessageBox.Show("Error: La duración de la promoción no puede exceder los 8 días.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 20003:
+                        MessageBox.Show(" Error: Ya existe una promoción activa con la misma este descuento.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 20005:
+                        MessageBox.Show("Error: la fecha inicial no puede ser anterior a la fecha actua.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 20006:
+                        MessageBox.Show("Error:El descuento esta fuera de rango.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    default:
+                        MessageBox.Show("Error al editar la reserva: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                // Capturamos cualquier otro tipo de error
+                MessageBox.Show("Error al editar la Promocion: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
     }
 }

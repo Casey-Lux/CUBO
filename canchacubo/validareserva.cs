@@ -14,7 +14,7 @@ namespace canchacubo
 {
     public partial class validareserva : Form
     {
-             
+
         DateTime fecha;
         string hora;
         int cancha;
@@ -42,13 +42,13 @@ namespace canchacubo
         }
         private void registrar_Click(object sender, EventArgs e)
         {
-             string id_cliente = txt_id_cliente.Text;
-            if (string.IsNullOrEmpty(id_cliente) )
+            string id_cliente = txt_id_cliente.Text;
+            if (string.IsNullOrEmpty(id_cliente))
             {
                 MessageBox.Show("Por favor rellene los campos obligatorios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            bool resultado=reserva.Registrar_Reserva(fecha, hora, id_cliente, cancha,idpromo);
+            bool resultado = reserva.Registrar_Reserva(fecha, hora, id_cliente, cancha, idpromo);
             if (resultado)
             {
                 decimal costo = manager.ObtenerCostoCancha(cancha);
@@ -68,75 +68,102 @@ namespace canchacubo
                 MessageBox.Show("Error al recargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void CargarPromocionesEnComboBox()
+
         {
+
             cbx_promociones.Items.Clear();
+
             cbx_promociones.DropDownStyle = ComboBoxStyle.DropDownList;  // Deshabilita la edición
+
 
             RecargarDatosPromocion();  // Cargar los datos en dtpromociones
 
+
             // Verificar si la columna "InformacionPromo" ya existe para evitar errores
+
             if (!dtpromociones.Columns.Contains("InformacionPromo"))
+
             {
+
                 dtpromociones.Columns.Add("InformacionPromo", typeof(string));
+
             }
+
 
             // Formatear cada fila existente con el formato deseado para mostrar en el ComboBox
+
             foreach (DataRow row in dtpromociones.Rows)
+
             {
-                string idepromocion = row["identificador"].ToString();
-                string descuento = row["descuento"].ToString();
-                string informacionPromo = $"Promocion: {idepromocion} -- {descuento} %";
-                row["InformacionPromo"] = informacionPromo;
+                       string idepromocion = row["identificador"].ToString();
+
+                        string descuento = row["descuento"].ToString();
+
+                        string informacionPromo = $"Promocion: {idepromocion} -- {descuento} %";
+
+                        row["InformacionPromo"] = informacionPromo;
+
             }
 
+
             // Crear una fila para la opción "Ninguno" y agregarla como la primera fila
+
             DataRow rowNinguno = dtpromociones.NewRow();
+
             rowNinguno["identificador"] = DBNull.Value;  // Valor de identificador vacío
+
             rowNinguno["descuento"] = DBNull.Value;      // Valor de descuento vacío
+
             rowNinguno["InformacionPromo"] = "Ninguno";
+
             dtpromociones.Rows.InsertAt(rowNinguno, 0);
 
+
             // Asignar la DataSource y definir DisplayMember y ValueMember
+
             cbx_promociones.DataSource = dtpromociones;
+
             cbx_promociones.DisplayMember = "InformacionPromo";
+
             cbx_promociones.ValueMember = "identificador";  // Permite obtener el ID de la promoción seleccionada
+
         }
 
-
         private void cbx_promociones_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Verifica que haya una selección válida
-            if (cbx_promociones.SelectedItem is DataRowView selectedRow)
             {
-                // Verifica si la opción seleccionada es "Ninguno"
-                if (selectedRow["InformacionPromo"].ToString() == "Ninguno")
+                // Verifica que haya una selección válida
+                if (cbx_promociones.SelectedItem is DataRowView selectedRow)
                 {
-                    descuentoSeleccionado = 0;
-                }
-                else
-                {
-                    string idpromocion = selectedRow["identificador"].ToString();
-                    // Intenta convertir el descuento a decima
-                    if (decimal.TryParse(idpromocion, out decimal ide))
+                    // Verifica si la opción seleccionada es "Ninguno"
+                    if (selectedRow["InformacionPromo"].ToString() == "Ninguno")
                     {
-                        idpromo = ide;
-                    }
-                    // Obtiene el valor del descuento de la fila seleccionada
-                    string descuentoStr = selectedRow["descuento"].ToString();
-
-                    // Intenta convertir el descuento a decima
-                    if (decimal.TryParse(descuentoStr, out decimal descuento))
-                    {
-                        descuentoSeleccionado = descuento;
+                        descuentoSeleccionado = 0;
                     }
                     else
                     {
-                        descuentoSeleccionado = 0; 
+                        string idpromocion = selectedRow["identificador"].ToString();
+                        // Intenta convertir el descuento a decima
+                        if (decimal.TryParse(idpromocion, out decimal ide))
+                        {
+                            idpromo = ide;
+                        }
+                        // Obtiene el valor del descuento de la fila seleccionada
+                        string descuentoStr = selectedRow["descuento"].ToString();
+
+                        // Intenta convertir el descuento a decima
+                        if (decimal.TryParse(descuentoStr, out decimal descuento))
+                        {
+                            descuentoSeleccionado = descuento;
+                        }
+                        else
+                        {
+                            descuentoSeleccionado = 0;
+                        }
                     }
                 }
-            }
 
+            }
         }
-    }
-}
+    } 

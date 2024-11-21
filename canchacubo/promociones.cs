@@ -45,9 +45,5 @@ namespace canchacubo
             this.Close();
         }
 
-        private void btn_eliminar_Click(object sender, EventArgs e)
-        {
-           
-        }
     }
 }
