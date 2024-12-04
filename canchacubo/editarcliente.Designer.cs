@@ -35,11 +35,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txt_estado = new System.Windows.Forms.TextBox();
             this.txt_telefono = new System.Windows.Forms.TextBox();
             this.txtt_nombre = new System.Windows.Forms.TextBox();
             this.btn_editar = new System.Windows.Forms.Button();
             this.cbxclientes = new System.Windows.Forms.ComboBox();
+            this.cbx_estado = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -78,7 +78,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(313, 274);
+            this.label5.Location = new System.Drawing.Point(324, 276);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(60, 20);
             this.label5.TabIndex = 22;
@@ -92,7 +92,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 20);
             this.label4.TabIndex = 21;
-            this.label4.Text = "Telefono";
+            this.label4.Text = "Teléfono";
             // 
             // label3
             // 
@@ -112,15 +112,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(103, 20);
             this.label2.TabIndex = 19;
-            this.label2.Text = "Identificacion";
-            // 
-            // txt_estado
-            // 
-            this.txt_estado.Location = new System.Drawing.Point(132, 276);
-            this.txt_estado.MaxLength = 1;
-            this.txt_estado.Name = "txt_estado";
-            this.txt_estado.Size = new System.Drawing.Size(138, 20);
-            this.txt_estado.TabIndex = 18;
+            this.label2.Text = "Identificación";
             // 
             // txt_telefono
             // 
@@ -159,12 +151,25 @@
             this.cbxclientes.TabIndex = 25;
             this.cbxclientes.SelectedIndexChanged += new System.EventHandler(this.cbxclientes_SelectedIndexChanged);
             // 
+            // cbx_estado
+            // 
+            this.cbx_estado.FormattingEnabled = true;
+            this.cbx_estado.Items.AddRange(new object[] {
+            "Activo",
+            "Inactivo"});
+            this.cbx_estado.Location = new System.Drawing.Point(132, 278);
+            this.cbx_estado.MaxLength = 10;
+            this.cbx_estado.Name = "cbx_estado";
+            this.cbx_estado.Size = new System.Drawing.Size(138, 21);
+            this.cbx_estado.TabIndex = 27;
+            // 
             // editarcliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::canchacubo.Properties.Resources.fondo;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cbx_estado);
             this.Controls.Add(this.cbxclientes);
             this.Controls.Add(this.btn_editar);
             this.Controls.Add(this.btn_crearcliente);
@@ -172,7 +177,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txt_estado);
             this.Controls.Add(this.txt_telefono);
             this.Controls.Add(this.txtt_nombre);
             this.Controls.Add(this.btn_volver);
@@ -193,10 +197,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txt_estado;
         private System.Windows.Forms.TextBox txt_telefono;
         private System.Windows.Forms.TextBox txtt_nombre;
         private System.Windows.Forms.Button btn_editar;
         private System.Windows.Forms.ComboBox cbxclientes;
+        private System.Windows.Forms.ComboBox cbx_estado;
     }
 }

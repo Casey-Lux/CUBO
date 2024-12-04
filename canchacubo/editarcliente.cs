@@ -23,11 +23,8 @@ namespace canchacubo
         {
             InitializeComponent();
             CargarClientesEnComboBox();
-            txtt_nombre.Enabled = false;
-            txt_telefono.Enabled = false;           
-            txt_estado.Enabled = false;
-            btn_crearcliente.Enabled = false;
-
+            modificaraccesoespacios(false);
+            cbx_estado.DropDownStyle = ComboBoxStyle.DropDownList;  // Deshabilita la edición
         }
 
         private void btn_volver_Click(object sender, EventArgs e)
@@ -41,15 +38,20 @@ namespace canchacubo
 
             String nombre = txtt_nombre.Text;
             string telefono = txt_telefono.Text;            
-            String estado = txt_estado.Text;
+            String estado ;
             if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(telefono) ||
-        string.IsNullOrEmpty(identificacion) || string.IsNullOrEmpty(estado))
+        string.IsNullOrEmpty(identificacion) || cbx_estado.SelectedIndex == -1)
             {
                 // Mostrar mensaje de error si algún campo está vacío
                 MessageBox.Show("Debe diligenciar todos los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return; // Salir del método sin continuar
             }
+            else
+            {
+                estado = obtenerestado();
+            }
             clsCliente cliente_obj = new clsCliente();
+            this.ClienteModificado += Refrescarclientes;
             cliente_obj.EditarCliente(identificacion, nombre, telefono, estado);
             ClienteModificado?.Invoke(this, EventArgs.Empty);
         }
@@ -62,11 +64,8 @@ namespace canchacubo
                 return;
             }
             Boolean resultado = cliente_obj.ConsultarCliente(identificacion);
-            if (resultado) {
-                txtt_nombre.Enabled = true;
-                txt_telefono.Enabled = true;
-                txt_estado.Enabled = true;
-                btn_crearcliente.Enabled = true;
+            if (resultado) {              
+                modificaraccesoespacios(true);
 
             }
 
@@ -86,7 +85,6 @@ namespace canchacubo
         }
         private void CargarClientesEnComboBox()
         {
-            cbxclientes.Items.Clear();
             
             RecargarDatosClientes();  // Cargar los datos en dtpromociones
 
@@ -99,9 +97,8 @@ namespace canchacubo
             // Formatear cada fila existente con el formato deseado para mostrar en el ComboBox
             foreach (DataRow row in dtclientes.Rows)
             {
-                string cedula = row["identificacion"].ToString();
-                string nombre = row["nombre"].ToString();
-                string informacionPromo = $"cedula: {cedula}  nombre: {nombre} ";
+                string cedula = row["identificacion"].ToString();               
+                string informacionPromo = $"cedula: {cedula} ";
                 row["Informacion"] = informacionPromo;
             }
 
@@ -112,7 +109,16 @@ namespace canchacubo
             cbxclientes.DisplayMember = "Informacion";
             cbxclientes.ValueMember = "identificacion";  // Permite obtener el ID de la promoción seleccionada
         }
+        private String obtenerestado()
+        {
+            string estado = cbx_estado.SelectedItem.ToString(); ;//obtener estado
+            if (estado == "Activo")
+            {
+                return "1";
+            }
+            else return "0";
 
+        }
         private void cbxclientes_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Verifica que haya una selección válida
@@ -121,6 +127,21 @@ namespace canchacubo
                  identificacion = selectedRow["identificacion"].ToString();
             }
 
+        }
+        private void Refrescarclientes(object sender, EventArgs e)
+        {
+            modificaraccesoespacios(false);
+            CargarClientesEnComboBox();
+        }
+        private void modificaraccesoespacios(bool estado)
+        {
+            txtt_nombre.Clear();
+            txt_telefono.Clear();
+            txtt_nombre.Enabled = estado;
+            txt_telefono.Enabled = estado;
+            cbx_estado.Enabled = estado;
+            cbx_estado.SelectedIndex = -1;
+            btn_crearcliente.Enabled = estado;
         }
     }
 }

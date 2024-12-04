@@ -20,11 +20,9 @@ namespace canchacubo
         public editarpromocion()
         {
             InitializeComponent();
-            CargarPromocionesEnComboBox();
-            txt_descuento.Enabled = false;
-            txt_estado.Enabled = false;
-            dtp_fechainicio.Enabled = false;
-            dtp_fechafin.Enabled = false;
+            CargarPromocionesEnComboBox();           
+            cbx_estado.DropDownStyle = ComboBoxStyle.DropDownList;  // Deshabilita la edición
+            cbx_promociones.DropDownStyle = ComboBoxStyle.DropDownList;  // Deshabilita la edición
         }
 
         private void btn_volver_Click(object sender, EventArgs e)
@@ -36,21 +34,24 @@ namespace canchacubo
 
         private void btn_editar_Click(object sender, EventArgs e)
         {
-
             String descuento = txt_descuento.Text;
-            String estado = txt_estado.Text;
+            String estado ;
             DateTime fechainicio = obtenerFechaideal();
             DateTime fechafin = dtp_fechafin.Value.Date;
-            if (string.IsNullOrEmpty(descuento) || string.IsNullOrEmpty(estado) || dtp_fechainicio.Checked == false)
+            if (string.IsNullOrEmpty(descuento) || dtp_fechainicio.Checked == false || cbx_estado.SelectedIndex == -1)
             {
 
                 MessageBox.Show("Debe diligenciar todos los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            else
+            {
+                estado = obtenerestado();
+            }
             this.EdicionExitosa += RefrescarPromociones;
             bool resultado = promo.EditarPromocion(idpromocion,fechainicio, fechafin, estado, descuento);
             if (resultado)
-            {
+            {              
                 // Si el registro fue exitoso, disparamos el evento edicionRegistrado
                 MessageBox.Show("Promocion editada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 EdicionExitosa?.Invoke(this, EventArgs.Empty); // Dispara el evento si no es null               
@@ -76,10 +77,6 @@ namespace canchacubo
         private void CargarPromocionesEnComboBox()
 
         {
-
-          
-            cbx_promociones.DropDownStyle = ComboBoxStyle.DropDownList;  // Deshabilita la edición
-
 
             RecargarDatosPromocion();  // Cargar los datos en dtpromociones
 
@@ -109,6 +106,17 @@ namespace canchacubo
                 row["InformacionPromo"] = informacionPromo;
 
             }
+            // Crear una fila para la opción "Ninguno" y agregarla como la primera fila
+
+            DataRow rowNinguno = dtpromociones.NewRow();
+
+            rowNinguno["identificador"] = DBNull.Value;  // Valor de identificador vacío
+
+            rowNinguno["descuento"] = DBNull.Value;      // Valor de descuento vacío
+
+            rowNinguno["InformacionPromo"] = "";
+
+            dtpromociones.Rows.InsertAt(rowNinguno, 0);
 
             // Asignar la DataSource y definir DisplayMember y ValueMember
 
@@ -125,24 +133,17 @@ namespace canchacubo
             // Verifica que haya una selección válida
             if (cbx_promociones.SelectedItem is DataRowView selectedRow)
             {
-                idpromocion = selectedRow["identificador"].ToString();
 
-            }
+                // Verifica si la opción seleccionada es "Ninguno"
+                if (selectedRow["InformacionPromo"].ToString() != "")
+                {
+                    idpromocion = selectedRow["identificador"].ToString();
+
+
+                }
+            }           
         }
 
-        private void btn_consultar_Click(object sender, EventArgs e)
-        {
-            if (cbx_promociones.SelectedIndex == 0)
-            {
-                MessageBox.Show("Por favor, seleccione una promocion.", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }else
-            txt_descuento.Enabled = true;
-            txt_estado.Enabled = true;
-            dtp_fechainicio.Enabled = true;
-            dtp_fechafin.Enabled = true;
-
-        }
         private DateTime obtenerFechaideal()
         {
             DateTime fechaSeleccionada = dtp_fechainicio.Value.Date;//obtener solo la fecha
@@ -152,5 +153,16 @@ namespace canchacubo
             }
             return fechaSeleccionada;
         }
+        private String obtenerestado()
+        {
+            string estado = cbx_estado.SelectedItem.ToString(); ;//obtener estado
+            if (estado == "Activo")
+            {
+                return "1";
+            }
+            else return "0";
+
+        }
+       
     }
 }

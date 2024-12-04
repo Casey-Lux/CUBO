@@ -40,7 +40,7 @@ namespace canchacubo.clases
                         // Ejecutamos la consulta
                         connection.Open();
                         command.ExecuteNonQuery();
-                        MessageBox.Show("promocion registrada", "Registro Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Promocion registrada", "Registro Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
@@ -55,7 +55,7 @@ namespace canchacubo.clases
                 switch (ex.Number)
                 {
                     case 20001:
-                        MessageBox.Show("Error: La Fecha_Fin no puede ser anterior a la Fecha_Inicio.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Error: Fecha de incio mayor a la fecha final.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     case 20002:
                         MessageBox.Show("Error: La duración de la promoción no puede exceder los 8 días.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -67,7 +67,10 @@ namespace canchacubo.clases
                         MessageBox.Show("Error: la fecha inicial no puede ser anterior a la fecha actua.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     case 20006:
-                        MessageBox.Show("Error:El desceunto esta fuera de rango.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Error:El descuento esta fuera de rango.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 20007:
+                        MessageBox.Show("Error:Promocion inactiva.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     default:
                         MessageBox.Show("Error al registrar la reserva: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -176,7 +179,7 @@ namespace canchacubo.clases
                 switch (ex.Number)
                 {
                     case 20001:
-                        MessageBox.Show("Error: La Fecha_Fin no puede ser anterior a la Fecha_Inicio.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Error: Fecha de incio mayor a la fecha final.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     case 20002:
                         MessageBox.Show("Error: La duración de la promoción no puede exceder los 8 días.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

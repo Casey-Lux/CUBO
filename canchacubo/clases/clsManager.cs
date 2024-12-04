@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace canchacubo.clases
 {
@@ -43,10 +44,28 @@ namespace canchacubo.clases
                 }
             }
         }
+        public DataTable obtenerTablaDatos(string opcion)
+        {
+            using (OracleConnection conn = new OracleConnection(cadenaConexion))
+            {
+                conn.Open();
 
+                using (OracleCommand cmd = new OracleCommand("gestioninforme.OBTENER_TABLA_DATOS", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("opcion", OracleDbType.Varchar2).Value = opcion;
+                    cmd.Parameters.Add("p_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
 
+                    using (OracleDataAdapter da = new OracleDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        return dt;
+                    }
+                }
+            }
 
-
+        }
 
 
     }

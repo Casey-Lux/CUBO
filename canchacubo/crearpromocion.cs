@@ -27,18 +27,17 @@ namespace canchacubo
 
         private void btn_crear_Click(object sender, EventArgs e)
         {
-            String descuento = txt_descuento.Text;           
-            String estado = txt_estado.Text;
+            String descuento = txt_descuento.Text;                      
             DateTime fechainicio = obtenerFechaideal();
             DateTime fechafin = dtp_fechafin.Value.Date;
-            if (string.IsNullOrEmpty(descuento) || string.IsNullOrEmpty(estado)|| dtp_fechainicio.Checked == false)           
+            if (string.IsNullOrEmpty(descuento) || dtp_fechainicio.Checked == false)           
             {
 
                 MessageBox.Show("Debe diligenciar todos los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             clsPromocion obj_prom = new clsPromocion();
-            obj_prom.RegistrarPromocion(fechainicio, fechafin, estado, descuento);
+            obj_prom.RegistrarPromocion(fechainicio, fechafin, "1", descuento);
         }
         private DateTime obtenerFechaideal()
         {

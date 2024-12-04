@@ -28,17 +28,16 @@ namespace canchacubo
         {
             String nombre = txtt_nombre.Text;
             string telefono = txt_telefono.Text;
-            String identificacion = txt_identificacion.Text;
-            String estado = txt_estado.Text;
+            String identificacion = txt_identificacion.Text;         
             if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(telefono) ||
-             string.IsNullOrEmpty(identificacion) || string.IsNullOrEmpty(estado))
+             string.IsNullOrEmpty(identificacion))
             {
                 
                 MessageBox.Show("Debe diligenciar todos los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return; 
             }
             clsCliente cliente_obj = new clsCliente();
-            bool resultado = cliente_obj.InsertarCliente(identificacion, nombre, telefono, estado);
+            bool resultado = cliente_obj.InsertarCliente(identificacion, nombre, telefono, "1");
 
             if (resultado)
             {

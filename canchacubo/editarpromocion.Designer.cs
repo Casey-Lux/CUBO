@@ -37,11 +37,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txt_estado = new System.Windows.Forms.TextBox();
             this.txt_descuento = new System.Windows.Forms.TextBox();
             this.cbx_promociones = new System.Windows.Forms.ComboBox();
-            this.btn_consultar = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.cbx_estado = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -57,9 +56,9 @@
             // btn_volver
             // 
             this.btn_volver.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_volver.Location = new System.Drawing.Point(668, 386);
+            this.btn_volver.Location = new System.Drawing.Point(664, 363);
             this.btn_volver.Name = "btn_volver";
-            this.btn_volver.Size = new System.Drawing.Size(95, 29);
+            this.btn_volver.Size = new System.Drawing.Size(107, 33);
             this.btn_volver.TabIndex = 5;
             this.btn_volver.Text = "VOLVER";
             this.btn_volver.UseVisualStyleBackColor = true;
@@ -93,46 +92,42 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(329, 313);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(51, 13);
+            this.label5.Size = new System.Drawing.Size(68, 18);
             this.label5.TabIndex = 23;
             this.label5.Text = "Fecha fin";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(316, 260);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 13);
+            this.label4.Size = new System.Drawing.Size(93, 20);
             this.label4.TabIndex = 22;
             this.label4.Text = "Fecha inicio";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(257, 206);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(268, 206);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.Size = new System.Drawing.Size(60, 20);
             this.label3.TabIndex = 21;
             this.label3.Text = "Estado";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(257, 146);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(268, 146);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 13);
+            this.label2.Size = new System.Drawing.Size(87, 20);
             this.label2.TabIndex = 20;
             this.label2.Text = "Descuento";
-            // 
-            // txt_estado
-            // 
-            this.txt_estado.Location = new System.Drawing.Point(94, 206);
-            this.txt_estado.MaxLength = 1;
-            this.txt_estado.Name = "txt_estado";
-            this.txt_estado.Size = new System.Drawing.Size(131, 20);
-            this.txt_estado.TabIndex = 19;
             // 
             // txt_descuento
             // 
@@ -152,17 +147,6 @@
             this.cbx_promociones.TabIndex = 29;
             this.cbx_promociones.SelectedIndexChanged += new System.EventHandler(this.cbx_promociones_SelectedIndexChanged_1);
             // 
-            // btn_consultar
-            // 
-            this.btn_consultar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_consultar.Location = new System.Drawing.Point(499, 96);
-            this.btn_consultar.Name = "btn_consultar";
-            this.btn_consultar.Size = new System.Drawing.Size(97, 24);
-            this.btn_consultar.TabIndex = 28;
-            this.btn_consultar.Text = "ENTER";
-            this.btn_consultar.UseVisualStyleBackColor = true;
-            this.btn_consultar.Click += new System.EventHandler(this.btn_consultar_Click);
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -173,14 +157,26 @@
             this.label6.TabIndex = 27;
             this.label6.Text = "selecciona una promocion";
             // 
+            // cbx_estado
+            // 
+            this.cbx_estado.FormattingEnabled = true;
+            this.cbx_estado.Items.AddRange(new object[] {
+            "Activo",
+            "Inactivo"});
+            this.cbx_estado.Location = new System.Drawing.Point(87, 206);
+            this.cbx_estado.MaxLength = 10;
+            this.cbx_estado.Name = "cbx_estado";
+            this.cbx_estado.Size = new System.Drawing.Size(138, 21);
+            this.cbx_estado.TabIndex = 30;
+            // 
             // editarpromocion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::canchacubo.Properties.Resources.fondo;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cbx_estado);
             this.Controls.Add(this.cbx_promociones);
-            this.Controls.Add(this.btn_consultar);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btn_editar);
             this.Controls.Add(this.dtp_fechafin);
@@ -189,7 +185,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txt_estado);
             this.Controls.Add(this.txt_descuento);
             this.Controls.Add(this.btn_volver);
             this.Controls.Add(this.label1);
@@ -211,10 +206,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txt_estado;
         private System.Windows.Forms.TextBox txt_descuento;
         private System.Windows.Forms.ComboBox cbx_promociones;
-        private System.Windows.Forms.Button btn_consultar;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cbx_estado;
     }
 }

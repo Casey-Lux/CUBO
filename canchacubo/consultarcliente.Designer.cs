@@ -85,7 +85,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(103, 20);
             this.label2.TabIndex = 11;
-            this.label2.Text = "Identificacion";
+            this.label2.Text = "Identificación";
             this.label2.Click += new System.EventHandler(this.label2_Click_1);
             // 
             // consultarcliente
