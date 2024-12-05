@@ -109,7 +109,7 @@ namespace canchacubo.clases
             }
             if (fechafin<fechainicio)
             {
-                throw new ArgumentException("La fecha de finalizacion no puede anterior a la fecha de incio ");
+                throw new ArgumentException("La fecha de finalizacion no puede ser anterior a la fecha de incio ");
             }
             return true;
         }       

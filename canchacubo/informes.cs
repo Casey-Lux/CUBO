@@ -53,6 +53,7 @@ namespace canchacubo
         {
             if (opcionseleccionada == "canchas")
             {
+                ConvertirColumnaAString();
                 // Calcula las sumas
                 decimal totalReservas = 0;
                 decimal totalIngresos = 0;
@@ -69,11 +70,30 @@ namespace canchacubo
                 DataRow filaTotales = dtcanchas.NewRow();                
                 filaTotales["reservas"] = totalReservas;
                 filaTotales["ingresos"] = totalIngresos;
-                
+                filaTotales["precio"] = "Total";
+
                 // Agrega la fila al DataTable
                 dtcanchas.Rows.Add(filaTotales);
                 
             }
+        }
+        private void ConvertirColumnaAString()
+        {
+            // Clona la estructura del DataTable original
+            DataTable nuevoDataTable = dtcanchas.Clone();
+
+            // Cambia el tipo de la columna deseada a string
+            nuevoDataTable.Columns["precio"].DataType = typeof(string);
+            
+            // Copia los datos al nuevo DataTable
+            foreach (DataRow fila in dtcanchas.Rows)
+            {
+                nuevoDataTable.ImportRow(fila);
+            }
+
+            // Asigna el nuevo DataTable al original
+            dtcanchas = nuevoDataTable;
+
         }
 
         private void cbxopciones_SelectedIndexChanged(object sender, EventArgs e)
