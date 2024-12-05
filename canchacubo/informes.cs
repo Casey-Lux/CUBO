@@ -19,6 +19,9 @@ namespace canchacubo
         public informes()
         {
             InitializeComponent();
+            cbxopciones.DropDownStyle = ComboBoxStyle.DropDownList;  // Deshabilita la edición
+            dgv_empleado.ReadOnly = true; // Deshabilita la ediciion en la tabla mostrada
+
         }
 
         private void btn_volver_Click(object sender, EventArgs e)
@@ -66,6 +69,7 @@ namespace canchacubo
                 DataRow filaTotales = dtcanchas.NewRow();                
                 filaTotales["reservas"] = totalReservas;
                 filaTotales["ingresos"] = totalIngresos;
+                
                 // Agrega la fila al DataTable
                 dtcanchas.Rows.Add(filaTotales);
                 
