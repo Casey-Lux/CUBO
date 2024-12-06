@@ -148,7 +148,7 @@ namespace canchacubo.clases
             }
         }
 
-        public void EditarCliente(string idCliente, string nuevoNombre, string nuevoTelefono, string nuevoEstado)
+        public bool EditarCliente(string idCliente, string nuevoNombre, string nuevoTelefono, string nuevoEstado)
         {
             try
             {
@@ -167,14 +167,20 @@ namespace canchacubo.clases
                         command.Parameters.Add("p_estado", OracleDbType.Decimal).Value = nuevoEstado;
 
                         connection.Open();
-                        command.ExecuteNonQuery();
-                        MessageBox.Show("Cliente actualizado", "Actualización Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        command.ExecuteNonQuery();                      
                     }
+                    // Retorna true si la inserción fue exitosa
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
             catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message, "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
             catch (OracleException ex)
             {
@@ -211,10 +217,12 @@ namespace canchacubo.clases
                         MessageBox.Show("Error al actualizar el cliente: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
+                return false;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al actualizar el cliente: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
         public bool ValidarDatosCliente(string cedula, string nombre, string telefono, string estado)
@@ -241,7 +249,7 @@ namespace canchacubo.clases
             // Si todas las validaciones son exitosas, retornamos true
             return true;
         }
-        private bool ValidarIdCliente(string idCliente)
+        public bool ValidarIdCliente(string idCliente)
         {
             // Validamos que no contenga letras ni caracteres inválidos
             if (Regex.IsMatch(idCliente, @"^[a-zA-Z]+$"))
@@ -277,6 +285,34 @@ namespace canchacubo.clases
                 OracleCommand command = new OracleCommand();
                 command.Connection = connection;
                 command.CommandText = "bdcanchascubo.OBTENER_CLIENTES";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("p_cursor", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+                try
+                {
+                    connection.Open();
+
+                    using (OracleDataAdapter adapter = new OracleDataAdapter(command))
+                    {
+                        DataSet dataSet = new DataSet();
+                        adapter.Fill(dtclientes);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cargar los datos: " + ex.Message);
+                }
+            }
+            return dtclientes;
+
+        }
+        public DataTable obtenerTablaClientesactivos()
+        {
+            DataTable dtclientes = new DataTable();
+            using (OracleConnection connection = new OracleConnection(cadenaConexion))
+            {
+                OracleCommand command = new OracleCommand();
+                command.Connection = connection;
+                command.CommandText = "bdcanchascubo.OBTENERCLIENTESACTIVOS";
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.Add("p_cursor", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
                 try

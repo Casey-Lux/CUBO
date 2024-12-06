@@ -14,15 +14,19 @@ namespace canchacubo
     public partial class editarpromocion : Form
     {
         DataTable dtpromociones = new DataTable();
-        clsPromocion promo = new clsPromocion();
+        clsPromocion promo = new clsPromocion();        
         string idpromocion;
+        String descuento;
+        String estado;
+        DateTime fechainicio;
+        DateTime fechafin ;
         public event EventHandler EdicionExitosa;
         public editarpromocion()
         {
             InitializeComponent();
             CargarPromocionesEnComboBox();           
             cbx_estado.DropDownStyle = ComboBoxStyle.DropDownList;  // Deshabilita la edición
-            cbx_promociones.DropDownStyle = ComboBoxStyle.DropDownList;  // Deshabilita la edición
+            cbx_promociones.DropDownStyle = ComboBoxStyle.DropDownList;  // Deshabilita la edición           
         }
 
         private void btn_volver_Click(object sender, EventArgs e)
@@ -34,10 +38,9 @@ namespace canchacubo
 
         private void btn_editar_Click(object sender, EventArgs e)
         {
-            String descuento = txt_descuento.Text;
-            String estado ;
-            DateTime fechainicio = obtenerFechaideal();
-            DateTime fechafin = dtp_fechafin.Value.Date;
+            descuento = txt_descuento.Text;            
+            fechainicio = obtenerFechaideal();
+            fechafin = dtp_fechafin.Value.Date;
             if (string.IsNullOrEmpty(descuento) || dtp_fechainicio.Checked == false || cbx_estado.SelectedIndex == -1)
             {
 
@@ -48,6 +51,7 @@ namespace canchacubo
             {
                 estado = obtenerestado();
             }
+
             this.EdicionExitosa += RefrescarPromociones;
             bool resultado = promo.EditarPromocion(idpromocion,fechainicio, fechafin, estado, descuento);
             if (resultado)
@@ -105,8 +109,7 @@ namespace canchacubo
 
                 row["InformacionPromo"] = informacionPromo;
 
-            }
-            // Crear una fila para la opción "Ninguno" y agregarla como la primera fila
+            } // Crear una fila para la opción "Ninguno" y agregarla como la primera fila
 
             DataRow rowNinguno = dtpromociones.NewRow();
 
@@ -114,7 +117,7 @@ namespace canchacubo
 
             rowNinguno["descuento"] = DBNull.Value;      // Valor de descuento vacío
 
-            rowNinguno["InformacionPromo"] = "";
+            rowNinguno["InformacionPromo"] = "Ninguno";
 
             dtpromociones.Rows.InsertAt(rowNinguno, 0);
 
@@ -123,23 +126,28 @@ namespace canchacubo
             cbx_promociones.DataSource = dtpromociones;
 
             cbx_promociones.DisplayMember = "InformacionPromo";
-
-            cbx_promociones.ValueMember = "identificador";  // Permite obtener el ID de la promoción seleccionada
-
+            cbx_promociones.ValueMember = "descuento";
+            cbx_promociones.ValueMember = "identificador";  // Permite obtener el ID de la promoción seleccionada           
+            cbx_promociones.ValueMember = "fecha_inicio";
+            cbx_promociones.ValueMember = "fecha_fin";
+            cbx_promociones.ValueMember = "estado";
         }
 
         private void cbx_promociones_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             // Verifica que haya una selección válida
             if (cbx_promociones.SelectedItem is DataRowView selectedRow)
-            {
-
-                // Verifica si la opción seleccionada es "Ninguno"
-                if (selectedRow["InformacionPromo"].ToString() != "")
+            {// Verifica si la opción seleccionada es "Ninguno"
+                if (selectedRow["InformacionPromo"].ToString()  != "Ninguno")
                 {
                     idpromocion = selectedRow["identificador"].ToString();
-
-
+                  bool resultado=  ExistePromocion(idpromocion);
+                    if (resultado) {
+                        txt_descuento.Text = descuento;
+                        dtp_fechainicio.Value = fechainicio;
+                        dtp_fechafin.Value = fechafin;
+                        actualizarestado();
+                    }
                 }
             }           
         }
@@ -163,6 +171,42 @@ namespace canchacubo
             else return "0";
 
         }
-       
+        public bool ExistePromocion(string identificador)
+        {
+            foreach (DataRow row in dtpromociones.Rows)
+            {
+                string ide = row["identificador"].ToString();
+                string v_descuento = row["descuento"].ToString();
+                string v_estado = row["estado"].ToString();
+                // Manejo seguro de columnas de fecha
+                DateTime v_fechainicio = row["fecha_inicio"] != DBNull.Value
+                    ? Convert.ToDateTime(row["fecha_inicio"])
+                    : DateTime.MinValue; // Valor por defecto si es nulo
+
+                DateTime v_fechafin = row["fecha_fin"] != DBNull.Value
+                    ? Convert.ToDateTime(row["fecha_fin"])
+                    : DateTime.MinValue; // Valor por defecto si es nulo
+                if (identificador == ide)
+                {
+                    descuento = v_descuento;
+                    estado = v_estado;
+                    fechainicio = v_fechainicio;
+                    fechafin = v_fechafin;
+                    return true;
+                }
+            }
+            return false;
+        }
+        private void actualizarestado()
+        {
+            if (estado == "1")
+            {
+                cbx_estado.SelectedIndex = 0;
+            }
+            else
+            {
+                cbx_estado.SelectedIndex = 1;
+            }
+        }
     }
 }

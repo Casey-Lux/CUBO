@@ -14,26 +14,25 @@ namespace canchacubo
     public partial class consultarcliente : Form
     {
         clsCliente cliente_obj = new clsCliente();
+        DataTable dtclientes = new DataTable();
+        string identificacion;
         public consultarcliente()
         {
             InitializeComponent();
+            CargarClientesEnComboBox();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
 
-            string idCliente = txtIdentificacion.Text.Trim();
-            if (string.IsNullOrWhiteSpace(idCliente))
+           
+            if (cbxclientes.SelectedIndex == -1)
             {
                 MessageBox.Show("La cédula no puede estar vacía. Inténtalo de nuevo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-           Boolean resultado=cliente_obj.ConsultarCliente(idCliente);
+           Boolean resultado=cliente_obj.ConsultarCliente(identificacion);
 
         }
 
@@ -44,25 +43,54 @@ namespace canchacubo
             this.Hide();
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void CargarClientesEnComboBox()
         {
 
+            RecargarDatosClientes();  // Cargar los datos en dtpromociones
+
+            // Verificar si la columna "InformacionPromo" ya existe para evitar errores
+            if (!dtclientes.Columns.Contains("Informacion"))
+            {
+                dtclientes.Columns.Add("Informacion", typeof(string));
+            }
+
+            // Formatear cada fila existente con el formato deseado para mostrar en el ComboBox
+            foreach (DataRow row in dtclientes.Rows)
+            {
+                string cedula = row["identificacion"].ToString();
+                string informacionPromo = $"cedula: {cedula} ";
+                row["Informacion"] = informacionPromo;
+            }
+
+            // Crear una fila para la opción "Ninguno" y agregarla como la primera fila
+
+            // Asignar la DataSource y definir DisplayMember y ValueMember
+            cbxclientes.DataSource = dtclientes;
+            cbxclientes.DisplayMember = "Informacion";
+            cbxclientes.ValueMember = "identificacion";  // Permite obtener el ID de la promoción seleccionada
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void RecargarDatosClientes()
         {
-
-
+            try
+            {
+                clsCliente obj_cliente = new clsCliente();
+                DataTable tabla = new DataTable();
+                dtclientes = obj_cliente.obtenerTablaClientes();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al recargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+       
 
-        private void consultarcliente_Load(object sender, EventArgs e)
+        private void cbxclientes_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-
-        }
-
-        private void label2_Click_1(object sender, EventArgs e)
-        {
-
+            // Verifica que haya una selección válida
+            if (cbxclientes.SelectedItem is DataRowView selectedRow)
+            {
+                identificacion = selectedRow["identificacion"].ToString();
+            }
         }
     }
 }

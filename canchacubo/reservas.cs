@@ -28,6 +28,7 @@ namespace canchacubo
             this.Load += reservas_Load;
             disponibilidadTimer.Interval = 300000; // Intervalo de 5 minutos en milisegundos
             disponibilidadTimer.Tick += (sender, e) => EjecutarDisponibilidad();
+            txt_fecha.MinDate = DateTime.Now;
 
         }
         private void reservas_Load(object sender, EventArgs e)

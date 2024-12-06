@@ -31,10 +31,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txt_id_cliente = new System.Windows.Forms.TextBox();
             this.cbx_promociones = new System.Windows.Forms.ComboBox();
             this.registrar = new System.Windows.Forms.Button();
             this.btn_volver = new System.Windows.Forms.Button();
+            this.cbxclientes = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -64,14 +64,6 @@
             this.label3.Size = new System.Drawing.Size(36, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "promo";
-            // 
-            // txt_id_cliente
-            // 
-            this.txt_id_cliente.Location = new System.Drawing.Point(173, 124);
-            this.txt_id_cliente.MaxLength = 10;
-            this.txt_id_cliente.Name = "txt_id_cliente";
-            this.txt_id_cliente.Size = new System.Drawing.Size(155, 20);
-            this.txt_id_cliente.TabIndex = 3;
             // 
             // cbx_promociones
             // 
@@ -105,16 +97,27 @@
             this.btn_volver.UseVisualStyleBackColor = true;
             this.btn_volver.Click += new System.EventHandler(this.btn_volver_Click);
             // 
+            // cbxclientes
+            // 
+            this.cbxclientes.FormattingEnabled = true;
+            this.cbxclientes.Location = new System.Drawing.Point(173, 124);
+            this.cbxclientes.MaxLength = 10;
+            this.cbxclientes.Name = "cbxclientes";
+            this.cbxclientes.Size = new System.Drawing.Size(138, 21);
+            this.cbxclientes.TabIndex = 27;
+            this.cbxclientes.SelectedIndexChanged += new System.EventHandler(this.cbxclientes_SelectedIndexChanged);
+            this.cbxclientes.TextChanged += new System.EventHandler(this.cbxclientes_TextChanged);
+            // 
             // validareserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::canchacubo.Properties.Resources.fondo;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cbxclientes);
             this.Controls.Add(this.btn_volver);
             this.Controls.Add(this.registrar);
             this.Controls.Add(this.cbx_promociones);
-            this.Controls.Add(this.txt_id_cliente);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -129,9 +132,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txt_id_cliente;
         private System.Windows.Forms.ComboBox cbx_promociones;
         private System.Windows.Forms.Button registrar;
         private System.Windows.Forms.Button btn_volver;
+        private System.Windows.Forms.ComboBox cbxclientes;
     }
 }

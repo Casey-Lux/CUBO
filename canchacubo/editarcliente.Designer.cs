@@ -150,6 +150,7 @@
             this.cbxclientes.Size = new System.Drawing.Size(138, 21);
             this.cbxclientes.TabIndex = 25;
             this.cbxclientes.SelectedIndexChanged += new System.EventHandler(this.cbxclientes_SelectedIndexChanged);
+            this.cbxclientes.TextChanged += new System.EventHandler(this.cbxclientes_TextChanged);
             // 
             // cbx_estado
             // 

@@ -20,7 +20,7 @@ namespace canchacubo
         {
             InitializeComponent();
             cbxopciones.DropDownStyle = ComboBoxStyle.DropDownList;  // Deshabilita la edición
-            dgv_empleado.ReadOnly = true; // Deshabilita la ediciion en la tabla mostrada
+            ajustartabla();
 
         }
 
@@ -104,5 +104,33 @@ namespace canchacubo
 
             
         }
-}
+        private void ajustartabla()
+        {
+            // Ajustar el ancho de columnas automáticamente según el contenido
+            dgv_empleado.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // Alternar colores para filas
+            dgv_empleado.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray;
+
+            // Cambiar color de fondo
+            dgv_empleado.BackgroundColor = Color.White;
+
+            // Personalizar el encabezado de columna
+            dgv_empleado.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Bold);
+            dgv_empleado.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
+            dgv_empleado.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+
+            // Personalizar bordes y celdas
+            dgv_empleado.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgv_empleado.DefaultCellStyle.SelectionBackColor = Color.CornflowerBlue;
+            dgv_empleado.DefaultCellStyle.SelectionForeColor = Color.White;
+
+            // Alinear texto en celdas
+            dgv_empleado.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // Deshabilitar edición directa (opcional)
+            dgv_empleado.ReadOnly = true;
+
+        }
+    }
 }

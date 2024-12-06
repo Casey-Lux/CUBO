@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.txtIdentificacion = new System.Windows.Forms.TextBox();
             this.btn_cliente = new System.Windows.Forms.Button();
             this.btn_volver = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.cbxclientes = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -44,21 +44,11 @@
             this.label1.Size = new System.Drawing.Size(194, 25);
             this.label1.TabIndex = 1;
             this.label1.Text = "Consultar Cliente";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // txtIdentificacion
-            // 
-            this.txtIdentificacion.Location = new System.Drawing.Point(210, 133);
-            this.txtIdentificacion.MaxLength = 10;
-            this.txtIdentificacion.Name = "txtIdentificacion";
-            this.txtIdentificacion.Size = new System.Drawing.Size(248, 20);
-            this.txtIdentificacion.TabIndex = 2;
-            this.txtIdentificacion.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // btn_cliente
             // 
             this.btn_cliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_cliente.Location = new System.Drawing.Point(509, 129);
+            this.btn_cliente.Location = new System.Drawing.Point(406, 133);
             this.btn_cliente.Name = "btn_cliente";
             this.btn_cliente.Size = new System.Drawing.Size(88, 28);
             this.btn_cliente.TabIndex = 3;
@@ -86,7 +76,16 @@
             this.label2.Size = new System.Drawing.Size(103, 20);
             this.label2.TabIndex = 11;
             this.label2.Text = "Identificación";
-            this.label2.Click += new System.EventHandler(this.label2_Click_1);
+            // 
+            // cbxclientes
+            // 
+            this.cbxclientes.FormattingEnabled = true;
+            this.cbxclientes.Location = new System.Drawing.Point(233, 132);
+            this.cbxclientes.MaxLength = 10;
+            this.cbxclientes.Name = "cbxclientes";
+            this.cbxclientes.Size = new System.Drawing.Size(138, 21);
+            this.cbxclientes.TabIndex = 26;
+            this.cbxclientes.SelectedIndexChanged += new System.EventHandler(this.cbxclientes_SelectedIndexChanged_1);
             // 
             // consultarcliente
             // 
@@ -94,14 +93,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::canchacubo.Properties.Resources.fondo;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cbxclientes);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btn_volver);
             this.Controls.Add(this.btn_cliente);
-            this.Controls.Add(this.txtIdentificacion);
             this.Controls.Add(this.label1);
             this.Name = "consultarcliente";
             this.Text = "consultarcliente";
-            this.Load += new System.EventHandler(this.consultarcliente_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -110,9 +108,9 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtIdentificacion;
         private System.Windows.Forms.Button btn_cliente;
         private System.Windows.Forms.Button btn_volver;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cbxclientes;
     }
 }

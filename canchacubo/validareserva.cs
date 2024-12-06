@@ -24,6 +24,9 @@ namespace canchacubo
         DataTable dtpromociones;
         Decimal idpromo = 0;
         Decimal descuentoSeleccionado = 0;
+        clsCliente cliente_obj = new clsCliente();
+        DataTable dtclientes = new DataTable();
+        string identificacion;
         public validareserva(DateTime fecha, string hora, int cancha)
         {
             this.fecha = fecha;
@@ -31,6 +34,7 @@ namespace canchacubo
             this.cancha = cancha;
             InitializeComponent();
             CargarPromocionesEnComboBox();
+            CargarClientesEnComboBox();
         }
 
         private void btn_volver_Click(object sender, EventArgs e)
@@ -42,13 +46,13 @@ namespace canchacubo
         }
         private void registrar_Click(object sender, EventArgs e)
         {
-            string id_cliente = txt_id_cliente.Text;
-            if (string.IsNullOrEmpty(id_cliente))
+          
+            if (string.IsNullOrWhiteSpace(cbxclientes.Text))
             {
                 MessageBox.Show("Por favor rellene los campos obligatorios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            bool resultado = reserva.Registrar_Reserva(fecha, hora, id_cliente, cancha, idpromo);
+            bool resultado = reserva.Registrar_Reserva(fecha, hora, identificacion, cancha, idpromo);
             if (resultado)
             {
                 decimal costo = manager.ObtenerCostoCancha(cancha);
@@ -61,7 +65,7 @@ namespace canchacubo
         {
             try
             {
-                dtpromociones = promo.ObtenerTablapPromociones();
+                dtpromociones = promo.ObtenerTablapPromocionesactivas();
             }
             catch (Exception ex)
             {
@@ -165,5 +169,65 @@ namespace canchacubo
                 }
 
             }
+        private void CargarClientesEnComboBox()
+        {
+
+            RecargarDatosClientes();  // Cargar los datos en dtpromociones
+
+            // Verificar si la columna "InformacionPromo" ya existe para evitar errores
+            if (!dtclientes.Columns.Contains("Informacion"))
+            {
+                dtclientes.Columns.Add("Informacion", typeof(string));
+            }
+
+            // Formatear cada fila existente con el formato deseado para mostrar en el ComboBox
+            foreach (DataRow row in dtclientes.Rows)
+            {
+                string cedula = row["identificacion"].ToString();
+                string informacionPromo = $"cedula: {cedula} ";
+                row["Informacion"] = informacionPromo;
+            }
+
+            // Crear una fila para la opción "Ninguno" y agregarla como la primera fila
+
+            // Asignar la DataSource y definir DisplayMember y ValueMember
+            cbxclientes.DataSource = dtclientes;
+            cbxclientes.DisplayMember = "Informacion";
+            cbxclientes.ValueMember = "identificacion";  // Permite obtener el ID de la promoción seleccionada
         }
-    } 
+        private void RecargarDatosClientes()
+        {
+            try
+            {
+                clsCliente obj_cliente = new clsCliente();
+                DataTable tabla = new DataTable();
+                dtclientes = obj_cliente.obtenerTablaClientesactivos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al recargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void cbxclientes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Verifica que haya una selección válida
+            if (cbxclientes.SelectedItem is DataRowView selectedRow)
+            {
+                identificacion = selectedRow["identificacion"].ToString();
+            }
+            else
+            {
+                // Si no hay selección, usa el texto ingresado
+                identificacion = cbxclientes.Text;
+            }
+        }
+        private void cbxclientes_TextChanged(object sender, EventArgs e)
+        {
+            // Actualiza la identificación con el texto escrito
+            identificacion = cbxclientes.Text;
+        }
+    }
+}
+    

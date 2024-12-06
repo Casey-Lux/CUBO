@@ -79,6 +79,12 @@ namespace canchacubo.clases
                     case 20005:
                         MessageBox.Show("Error: formato de fecha incorrecto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
+                    case 20006:
+                        MessageBox.Show("Error: Promocion inactiva.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 20008:
+                        MessageBox.Show("Error: Clinete inactivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
                     default:
                         MessageBox.Show("Error al registrar la reserva: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;

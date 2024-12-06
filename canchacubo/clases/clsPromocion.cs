@@ -134,6 +134,27 @@ namespace canchacubo.clases
             }
 
         }
+        public DataTable ObtenerTablapPromocionesactivas()
+        {
+            using (OracleConnection conn = new OracleConnection(cadenaConexion))
+            {
+                conn.Open();
+
+                using (OracleCommand cmd = new OracleCommand("bdcanchascubo.OBTENERPROMOCIONESACTIVAS", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("p_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+
+                    using (OracleDataAdapter da = new OracleDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        return dt;
+                    }
+                }
+            }
+
+        }
         public bool EditarPromocion(String identificador,DateTime fechainicio, DateTime fechafin, string estado, string descuento)
         {
             try
@@ -185,13 +206,16 @@ namespace canchacubo.clases
                         MessageBox.Show("Error: La duración de la promoción no puede exceder los 8 días.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     case 20003:
-                        MessageBox.Show(" Error: Ya existe una promoción activa con la misma este descuento.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(" Error: No hay cambio de estado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     case 20005:
-                        MessageBox.Show("Error: la fecha inicial no puede ser anterior a la fecha actua.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Error:Los nuevos datos son iguales a los datos existentes..", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     case 20006:
                         MessageBox.Show("Error:El descuento esta fuera de rango.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 20007:
+                        MessageBox.Show("Error:la fecha inicial no puede ser anterior a la fecha actual.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     default:
                         MessageBox.Show("Error al editar la reserva: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

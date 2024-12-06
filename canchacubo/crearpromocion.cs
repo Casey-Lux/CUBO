@@ -16,6 +16,8 @@ namespace canchacubo
         public crearpromocion()
         {
             InitializeComponent();
+            dtp_fechafin.MinDate = DateTime.Now;
+            dtp_fechainicio.MinDate = DateTime.Now;
         }
 
         private void btn_volver_Click(object sender, EventArgs e)
