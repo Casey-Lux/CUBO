@@ -15,7 +15,7 @@ namespace canchacubo.clases
         {
             try
             {
-                if (validar_reserva(fecha, horaSeleccionada, id_cliente, num_cancha, idpromo))
+                if (validar_idcliente( id_cliente))
                 {
 
                     using (OracleConnection connection = new OracleConnection(cadenaConexion))
@@ -155,36 +155,12 @@ namespace canchacubo.clases
             }
         }
 
-        public bool validar_reserva(DateTime fecha, string horaSeleccionada, string id_cliente, int num_cancha,Decimal idpromo)
+        public bool validar_idcliente( string id_cliente)
         {
             if (!Regex.IsMatch(id_cliente, @"^\d+$"))
             {
                 throw new ArgumentException("La cédula debe ser un número válido. Inténtalo de nuevo.");
-            }
-            DateTime horaInicio;
-            if (!DateTime.TryParse(horaSeleccionada, out horaInicio))
-            {
-                throw new ArgumentException("La hora seleccionada no es válida. Asegúrate de seleccionar un formato correcto..");
-            }
-            if (horaInicio.Hour < 12 || horaInicio.Hour > 23)
-            {
-                throw new ArgumentException("La hora de la reserva debe estar entre las 12:00 y las 23:00 horas.");
-            }
-
-            DateTime fechaHoraSeleccionada = new DateTime(fecha.Year, fecha.Month, fecha.Day, horaInicio.Hour, horaInicio.Minute, 0);
-            if (fechaHoraSeleccionada < DateTime.Now)
-            {
-                throw new ArgumentException("La fecha y hora de la reserva no puede ser anterior a la fecha actual.");
-            }
-
-            if (num_cancha < 1 || num_cancha > 5)
-            {
-                throw new ArgumentException("El número de cancha debe estar entre 1 y 5.");
-            }
-
-
-
-
+            }          
             return true;
         }
         public bool validar_eliminarReserva(DateTime fecha, string horaSeleccionada, int num_cancha)
@@ -235,6 +211,29 @@ namespace canchacubo.clases
             }
 
         }
-       
+        public bool validar_datosreserva(DateTime fecha, string horaSeleccionada,  int num_cancha)
+        {           
+            DateTime horaInicio;
+            if (!DateTime.TryParse(horaSeleccionada, out horaInicio))
+            {
+                throw new ArgumentException("La hora seleccionada no es válida. Asegúrate de seleccionar un formato correcto..");
+            }
+            if (horaInicio.Hour < 12 || horaInicio.Hour > 23)
+            {
+                throw new ArgumentException("La hora de la reserva debe estar entre las 12:00 y las 23:00 horas.");
+            }
+
+            DateTime fechaHoraSeleccionada = new DateTime(fecha.Year, fecha.Month, fecha.Day, horaInicio.Hour, horaInicio.Minute, 0);
+            if (fechaHoraSeleccionada < DateTime.Now)
+            {
+                throw new ArgumentException("La fecha y hora de la reserva no puede ser anterior a la fecha actual.");
+            }
+
+            if (num_cancha < 1 || num_cancha > 5)
+            {
+                throw new ArgumentException("El número de cancha debe estar entre 1 y 5.");
+            }
+            return true;
+        }
     }
 }

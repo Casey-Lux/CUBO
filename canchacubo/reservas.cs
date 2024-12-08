@@ -16,6 +16,7 @@ namespace canchacubo
     {
         int canchaSeleccionada = 0;
         DataTable dtreservas;
+        clsReserva reserva_obj = new clsReserva();
         public event EventHandler ReservaGestionada;
         string colorverde = "#80ee0c";
         string colorrojo = "#ee430c";
@@ -26,13 +27,14 @@ namespace canchacubo
         {
             InitializeComponent();
             this.Load += reservas_Load;
-            disponibilidadTimer.Interval = 300000; // Intervalo de 5 minutos en milisegundos
+            disponibilidadTimer.Interval = 3000; // Intervalo de 3 segundos en milisegundos
             disponibilidadTimer.Tick += (sender, e) => EjecutarDisponibilidad();
             txt_fecha.MinDate = DateTime.Now;
+            cbx_horario.DropDownStyle = ComboBoxStyle.DropDownList;  // Deshabilita la edición
 
         }
         private void reservas_Load(object sender, EventArgs e)
-        {            
+        {
             EjecutarDisponibilidad();
             disponibilidadTimer.Start();
         }
@@ -56,6 +58,13 @@ namespace canchacubo
             }
             string hora = cbx_horario.SelectedItem.ToString(); // ontener la hora y convertirla en froma  datetime          
             clsReserva objeto = new clsReserva();
+            bool estadocancha = canchasdisponibles.FirstOrDefault(p => p.canchas == canchaSeleccionada).estado;
+            if (!estadocancha)
+            {
+                MessageBox.Show("Reserva seleccionada inexiste ", "Error ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             bool resultado = objeto.EliminarReserva(fechaSeleccionada, hora, canchaSeleccionada);
             if (resultado)
             {
@@ -70,31 +79,31 @@ namespace canchacubo
         {
             canchaSeleccionada = 1;
             QuitarBordes();
-            cancha1.BorderStyle = BorderStyle.Fixed3D;           
+            cancha1.BorderStyle = BorderStyle.Fixed3D;
         }
         private void cancha2_Click(object sender, EventArgs e)
         {
             canchaSeleccionada = 2;
             QuitarBordes();
-            cancha2.BorderStyle = BorderStyle.Fixed3D;           
+            cancha2.BorderStyle = BorderStyle.Fixed3D;
         }
         private void cancha3_Click(object sender, EventArgs e)
         {
             canchaSeleccionada = 3;
             QuitarBordes();
-            cancha3.BorderStyle = BorderStyle.Fixed3D;           
+            cancha3.BorderStyle = BorderStyle.Fixed3D;
         }
         private void cancha4_Click(object sender, EventArgs e)
         {
             canchaSeleccionada = 4;
             QuitarBordes();
-            cancha4.BorderStyle = BorderStyle.Fixed3D;           
+            cancha4.BorderStyle = BorderStyle.Fixed3D;
         }
         private void cancha5_Click(object sender, EventArgs e)
         {
             canchaSeleccionada = 5;
             QuitarBordes();
-            cancha5.BorderStyle = BorderStyle.Fixed3D;            
+            cancha5.BorderStyle = BorderStyle.Fixed3D;
         }
         private void QuitarBordes()
         {
@@ -112,29 +121,39 @@ namespace canchacubo
         }
         private void btn_reservar_Click(object sender, EventArgs e)
         {
-            if (cbx_horario.SelectedIndex == -1)
+            try
             {
-                MessageBox.Show("Por favor, seleccione una opción para la hora.", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            DateTime fechaSeleccionada = obtenerFechaideal();
-            if (canchaSeleccionada == 0)
-            {
-                MessageBox.Show("Por favor, seleccione una cancha.", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            
-            bool estadocancha = canchasdisponibles.FirstOrDefault(p => p.canchas == canchaSeleccionada).estado;
-            if (estadocancha)
-            {
-                MessageBox.Show("ya existe una reserva para esta cancha en el mismo horario.", "Error ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+                if (cbx_horario.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Por favor, seleccione una opción para la hora.", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                DateTime fechaSeleccionada = obtenerFechaideal();
+                if (canchaSeleccionada == 0)
+                {
+                    MessageBox.Show("Por favor, seleccione una cancha.", "Error de selección", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
-            string hora = cbx_horario.SelectedItem.ToString(); // ontener la hora y convertirla en froma  datetime          
-            validareserva objeto = new validareserva(fechaSeleccionada, hora, canchaSeleccionada);
-            objeto.Show();
-            this.Close();
+                bool estadocancha = canchasdisponibles.FirstOrDefault(p => p.canchas == canchaSeleccionada).estado;
+                if (estadocancha)
+                {
+                    MessageBox.Show("ya existe una reserva para esta cancha en el mismo horario.", "Error ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                string hora = cbx_horario.SelectedItem.ToString(); // ontener la hora y convertirla en froma  datetime  
+                bool validar = reserva_obj.validar_datosreserva(fechaSeleccionada, hora, canchaSeleccionada);
+                if (validar)
+                {
+                    validareserva objeto = new validareserva(fechaSeleccionada, hora, canchaSeleccionada);
+                    objeto.Show();
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void RecargarDatosReservas()
         {
@@ -151,6 +170,7 @@ namespace canchacubo
         }
         public void EjecutarDisponibilidad()
         {
+            canchasdisponibles.Clear(); // Reinicia la lista antes de recalcular
             RecargarDatosReservas();
             DateTime fechaActual = obtenerFechaideal();
             string horaActual = obtenerHoraIdeal();
@@ -167,7 +187,8 @@ namespace canchacubo
             {
                 int numeroCancha = i + 1;
                 bool reservaExiste = ExisteReserva(numeroCancha, fechaActual, horaActual);
-
+                canchas[i].Paint -= MostrarCanchaNoDisponible;
+                canchas[i].Paint -= MostrarCanchaDisponible;
                 if (reservaExiste)
                 {
                     canchasdisponibles.Add((numeroCancha, true));
@@ -238,7 +259,6 @@ namespace canchacubo
                 return cbx_horario.SelectedItem.ToString();
             }
         }
-
         private DateTime obtenerFechaideal()
         {
             DateTime fechaSeleccionada = txt_fecha.Value.Date;//obtener solo la fecha

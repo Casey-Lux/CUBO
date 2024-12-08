@@ -132,5 +132,10 @@ namespace canchacubo
             dgv_empleado.ReadOnly = true;
 
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
