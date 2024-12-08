@@ -39,7 +39,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(239, 49);
+            this.label1.Location = new System.Drawing.Point(309, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(194, 25);
             this.label1.TabIndex = 1;
@@ -86,6 +86,7 @@
             this.cbxclientes.Size = new System.Drawing.Size(138, 21);
             this.cbxclientes.TabIndex = 26;
             this.cbxclientes.SelectedIndexChanged += new System.EventHandler(this.cbxclientes_SelectedIndexChanged_1);
+            this.cbxclientes.TextChanged += new System.EventHandler(this.cbxclientes_TextChanged);
             // 
             // consultarcliente
             // 

@@ -47,11 +47,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(299, 9);
+            this.label1.Location = new System.Drawing.Point(315, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(192, 25);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Editar Promocion";
+            this.label1.Text = "Editar Promoción";
             // 
             // btn_volver
             // 
@@ -153,9 +153,9 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(267, 100);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(193, 20);
+            this.label6.Size = new System.Drawing.Size(196, 20);
             this.label6.TabIndex = 27;
-            this.label6.Text = "selecciona una promocion";
+            this.label6.Text = "Selecciona una promoción";
             // 
             // cbx_estado
             // 

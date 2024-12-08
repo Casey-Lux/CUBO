@@ -138,23 +138,11 @@
     <Compile Include="editarpromocion.Designer.cs">
       <DependentUpon>editarpromocion.cs</DependentUpon>
     </Compile>
-    <Compile Include="eliminarpromocion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="eliminarpromocion.Designer.cs">
-      <DependentUpon>eliminarpromocion.cs</DependentUpon>
-    </Compile>
     <Compile Include="informes.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="informes.Designer.cs">
       <DependentUpon>informes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ingresos.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ingresos.Designer.cs">
-      <DependentUpon>ingresos.cs</DependentUpon>
     </Compile>
     <Compile Include="principal.cs">
       <SubType>Form</SubType>
@@ -200,14 +188,8 @@
     <EmbeddedResource Include="editarpromocion.resx">
       <DependentUpon>editarpromocion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="eliminarpromocion.resx">
-      <DependentUpon>eliminarpromocion.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="informes.resx">
       <DependentUpon>informes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ingresos.resx">
-      <DependentUpon>ingresos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="principal.resx">
       <DependentUpon>principal.cs</DependentUpon>

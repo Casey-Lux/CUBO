@@ -26,13 +26,18 @@ namespace canchacubo
         private void button1_Click(object sender, EventArgs e)
         {
 
-           
-            if (cbxclientes.SelectedIndex == -1)
+
+            if (string.IsNullOrWhiteSpace(cbxclientes.Text))
             {
                 MessageBox.Show("La cédula no puede estar vacía. Inténtalo de nuevo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-           Boolean resultado=cliente_obj.ConsultarCliente(identificacion);
+            bool validar = cliente_obj.ValidarIdCliente(identificacion);
+            if (validar)
+            {
+                Boolean resultado = cliente_obj.ConsultarCliente(identificacion);
+            }
+
 
         }
 
@@ -82,7 +87,7 @@ namespace canchacubo
                 MessageBox.Show("Error al recargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-       
+
 
         private void cbxclientes_SelectedIndexChanged_1(object sender, EventArgs e)
         {
@@ -91,6 +96,17 @@ namespace canchacubo
             {
                 identificacion = selectedRow["identificacion"].ToString();
             }
+            else
+            {
+                // Si no hay selección, usa el texto ingresado
+                identificacion = cbxclientes.Text;
+            }
+
+        }
+        private void cbxclientes_TextChanged(object sender, EventArgs e)
+        {
+            // Actualiza la identificación con el texto escrito
+            identificacion = cbxclientes.Text;
         }
     }
 }

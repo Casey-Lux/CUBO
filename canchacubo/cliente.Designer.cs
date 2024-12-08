@@ -40,7 +40,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(304, 25);
+            this.label1.Location = new System.Drawing.Point(372, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(86, 25);
             this.label1.TabIndex = 0;
@@ -58,9 +58,9 @@
             // btn_volver
             // 
             this.btn_volver.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_volver.Location = new System.Drawing.Point(642, 265);
+            this.btn_volver.Location = new System.Drawing.Point(648, 390);
             this.btn_volver.Name = "btn_volver";
-            this.btn_volver.Size = new System.Drawing.Size(107, 43);
+            this.btn_volver.Size = new System.Drawing.Size(107, 29);
             this.btn_volver.TabIndex = 5;
             this.btn_volver.Text = "VOLVER";
             this.btn_volver.UseVisualStyleBackColor = true;

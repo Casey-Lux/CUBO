@@ -43,7 +43,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(313, 9);
+            this.label1.Location = new System.Drawing.Point(396, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(187, 31);
             this.label1.TabIndex = 1;
@@ -92,7 +92,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(103, 20);
             this.label2.TabIndex = 10;
-            this.label2.Text = "Identificacion";
+            this.label2.Text = "Identificación";
             // 
             // label3
             // 
@@ -112,7 +112,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 20);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Telefono";
+            this.label4.Text = "Teléfono";
             // 
             // btn_crearcliente
             // 
