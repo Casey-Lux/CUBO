@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(reservas));
             this.label1 = new System.Windows.Forms.Label();
             this.cbx_horario = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -51,10 +52,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(257, 9);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(363, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 25);
+            this.label1.Size = new System.Drawing.Size(138, 31);
             this.label1.TabIndex = 0;
             this.label1.Text = "Reservas";
             // 
@@ -91,22 +92,25 @@
             this.cbx_horario.Name = "cbx_horario";
             this.cbx_horario.Size = new System.Drawing.Size(100, 21);
             this.cbx_horario.TabIndex = 1;
+            this.cbx_horario.SelectedIndexChanged += new System.EventHandler(this.cbx_horario_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(582, 90);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(553, 96);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 13);
+            this.label2.Size = new System.Drawing.Size(54, 20);
             this.label2.TabIndex = 3;
             this.label2.Text = "Fecha";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(259, 97);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(30, 13);
+            this.label3.Size = new System.Drawing.Size(41, 18);
             this.label3.TabIndex = 4;
             this.label3.Text = "Hora";
             // 
@@ -134,8 +138,8 @@
             // 
             // cancha1
             // 
-            this.cancha1.BackgroundImage = global::canchacubo.Properties.Resources.fondocancha;
-            this.cancha1.Image = global::canchacubo.Properties.Resources.fondocancha;
+            this.cancha1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("cancha1.BackgroundImage")));
+            this.cancha1.Image = ((System.Drawing.Image)(resources.GetObject("cancha1.Image")));
             this.cancha1.Location = new System.Drawing.Point(114, 183);
             this.cancha1.Name = "cancha1";
             this.cancha1.Size = new System.Drawing.Size(96, 125);
@@ -146,8 +150,8 @@
             // 
             // cancha2
             // 
-            this.cancha2.BackgroundImage = global::canchacubo.Properties.Resources.fondocancha;
-            this.cancha2.Image = global::canchacubo.Properties.Resources.fondocancha;
+            this.cancha2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("cancha2.BackgroundImage")));
+            this.cancha2.Image = ((System.Drawing.Image)(resources.GetObject("cancha2.Image")));
             this.cancha2.Location = new System.Drawing.Point(237, 183);
             this.cancha2.Name = "cancha2";
             this.cancha2.Size = new System.Drawing.Size(96, 125);
@@ -158,8 +162,8 @@
             // 
             // cancha3
             // 
-            this.cancha3.BackgroundImage = global::canchacubo.Properties.Resources.fondocancha;
-            this.cancha3.Image = global::canchacubo.Properties.Resources.fondocancha;
+            this.cancha3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("cancha3.BackgroundImage")));
+            this.cancha3.Image = ((System.Drawing.Image)(resources.GetObject("cancha3.Image")));
             this.cancha3.Location = new System.Drawing.Point(366, 183);
             this.cancha3.Name = "cancha3";
             this.cancha3.Size = new System.Drawing.Size(96, 125);
@@ -170,8 +174,8 @@
             // 
             // cancha4
             // 
-            this.cancha4.BackgroundImage = global::canchacubo.Properties.Resources.fondocancha;
-            this.cancha4.Image = global::canchacubo.Properties.Resources.fondocancha;
+            this.cancha4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("cancha4.BackgroundImage")));
+            this.cancha4.Image = ((System.Drawing.Image)(resources.GetObject("cancha4.Image")));
             this.cancha4.Location = new System.Drawing.Point(479, 183);
             this.cancha4.Name = "cancha4";
             this.cancha4.Size = new System.Drawing.Size(96, 125);
@@ -182,8 +186,8 @@
             // 
             // cancha5
             // 
-            this.cancha5.BackgroundImage = global::canchacubo.Properties.Resources.fondocancha;
-            this.cancha5.Image = global::canchacubo.Properties.Resources.fondocancha;
+            this.cancha5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("cancha5.BackgroundImage")));
+            this.cancha5.Image = ((System.Drawing.Image)(resources.GetObject("cancha5.Image")));
             this.cancha5.Location = new System.Drawing.Point(608, 183);
             this.cancha5.Name = "cancha5";
             this.cancha5.Size = new System.Drawing.Size(96, 125);
@@ -205,16 +209,17 @@
             // 
             // txt_fecha
             // 
-            this.txt_fecha.Location = new System.Drawing.Point(366, 90);
+            this.txt_fecha.Location = new System.Drawing.Point(332, 90);
             this.txt_fecha.Name = "txt_fecha";
             this.txt_fecha.Size = new System.Drawing.Size(200, 20);
             this.txt_fecha.TabIndex = 26;
+            this.txt_fecha.ValueChanged += new System.EventHandler(this.txt_fecha_ValueChanged);
             // 
             // reservas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::canchacubo.Properties.Resources.fondo;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.txt_fecha);
             this.Controls.Add(this.btn_reservar);
@@ -231,7 +236,6 @@
             this.Controls.Add(this.label1);
             this.Name = "reservas";
             this.Text = "Form2";
-            this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.cancha1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cancha2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cancha3)).EndInit();

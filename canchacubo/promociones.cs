@@ -21,35 +21,22 @@ namespace canchacubo
         {
             principal inicio = new principal();
             inicio.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void btn_crear_Click(object sender, EventArgs e)
         {
-            crearcliente cliente = new crearcliente();
-            cliente.Show();
-            this.Hide();
+            crearpromocion promo = new crearpromocion();
+            promo.Show();
+            this.Close();
         }
-
-        private void btn_consultar_Click(object sender, EventArgs e)
-        {
-            consultarcliente cliente = new consultarcliente();
-            cliente.Show();
-            this.Hide();
-        }
-
+   
         private void btn_editar_Click(object sender, EventArgs e)
         {
-            editarcliente cliente = new editarcliente();
-            cliente.Show();
-            this.Hide();
+            editarpromocion promo = new editarpromocion();
+            promo.Show();
+            this.Close();
         }
 
-        private void btn_eliminar_Click(object sender, EventArgs e)
-        {
-            eliminarcliente cliente = new eliminarcliente();
-            cliente.Show();
-            this.Hide();
-        }
     }
 }

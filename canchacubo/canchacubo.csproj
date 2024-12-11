@@ -12,6 +12,21 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -83,7 +98,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="clases\cliente.cs" />
+    <Compile Include="clases\clsCliente.cs" />
+    <Compile Include="clases\clsManager.cs" />
+    <Compile Include="clases\clsPromocion.cs" />
     <Compile Include="clases\clsReserva.cs" />
     <Compile Include="cliente.cs">
       <SubType>Form</SubType>
@@ -96,12 +113,6 @@
     </Compile>
     <Compile Include="consultarcliente.Designer.cs">
       <DependentUpon>consultarcliente.cs</DependentUpon>
-    </Compile>
-    <Compile Include="consultarpromocion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="consultarpromocion.Designer.cs">
-      <DependentUpon>consultarpromocion.cs</DependentUpon>
     </Compile>
     <Compile Include="crearcliente.cs">
       <SubType>Form</SubType>
@@ -127,29 +138,11 @@
     <Compile Include="editarpromocion.Designer.cs">
       <DependentUpon>editarpromocion.cs</DependentUpon>
     </Compile>
-    <Compile Include="eliminarcliente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="eliminarcliente.Designer.cs">
-      <DependentUpon>eliminarcliente.cs</DependentUpon>
-    </Compile>
-    <Compile Include="eliminarpromocion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="eliminarpromocion.Designer.cs">
-      <DependentUpon>eliminarpromocion.cs</DependentUpon>
-    </Compile>
     <Compile Include="informes.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="informes.Designer.cs">
       <DependentUpon>informes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ingresos.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ingresos.Designer.cs">
-      <DependentUpon>ingresos.cs</DependentUpon>
     </Compile>
     <Compile Include="principal.cs">
       <SubType>Form</SubType>
@@ -183,9 +176,6 @@
     <EmbeddedResource Include="consultarcliente.resx">
       <DependentUpon>consultarcliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="consultarpromocion.resx">
-      <DependentUpon>consultarpromocion.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="crearcliente.resx">
       <DependentUpon>crearcliente.cs</DependentUpon>
     </EmbeddedResource>
@@ -198,17 +188,8 @@
     <EmbeddedResource Include="editarpromocion.resx">
       <DependentUpon>editarpromocion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="eliminarcliente.resx">
-      <DependentUpon>eliminarcliente.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="eliminarpromocion.resx">
-      <DependentUpon>eliminarpromocion.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="informes.resx">
       <DependentUpon>informes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ingresos.resx">
-      <DependentUpon>ingresos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="principal.resx">
       <DependentUpon>principal.cs</DependentUpon>
@@ -258,6 +239,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\fondocancha1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

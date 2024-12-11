@@ -33,11 +33,9 @@
             this.txt_identificacion = new System.Windows.Forms.TextBox();
             this.txtt_nombre = new System.Windows.Forms.TextBox();
             this.txt_telefono = new System.Windows.Forms.TextBox();
-            this.txt_estado = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.btn_crearcliente = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -45,12 +43,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(313, 9);
+            this.label1.Location = new System.Drawing.Point(391, 39);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(187, 31);
             this.label1.TabIndex = 1;
             this.label1.Text = "Crear Cliente";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // btn_volver
             // 
@@ -66,6 +63,7 @@
             // txt_identificacion
             // 
             this.txt_identificacion.Location = new System.Drawing.Point(97, 163);
+            this.txt_identificacion.MaxLength = 10;
             this.txt_identificacion.Name = "txt_identificacion";
             this.txt_identificacion.Size = new System.Drawing.Size(138, 20);
             this.txt_identificacion.TabIndex = 6;
@@ -73,6 +71,7 @@
             // txtt_nombre
             // 
             this.txtt_nombre.Location = new System.Drawing.Point(97, 215);
+            this.txtt_nombre.MaxLength = 20;
             this.txtt_nombre.Name = "txtt_nombre";
             this.txtt_nombre.Size = new System.Drawing.Size(138, 20);
             this.txtt_nombre.TabIndex = 7;
@@ -80,16 +79,10 @@
             // txt_telefono
             // 
             this.txt_telefono.Location = new System.Drawing.Point(97, 273);
+            this.txt_telefono.MaxLength = 10;
             this.txt_telefono.Name = "txt_telefono";
             this.txt_telefono.Size = new System.Drawing.Size(138, 20);
             this.txt_telefono.TabIndex = 8;
-            // 
-            // txt_estado
-            // 
-            this.txt_estado.Location = new System.Drawing.Point(97, 327);
-            this.txt_estado.Name = "txt_estado";
-            this.txt_estado.Size = new System.Drawing.Size(138, 20);
-            this.txt_estado.TabIndex = 9;
             // 
             // label2
             // 
@@ -99,8 +92,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(103, 20);
             this.label2.TabIndex = 10;
-            this.label2.Text = "Identificacion";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.label2.Text = "Identificación";
             // 
             // label3
             // 
@@ -120,17 +112,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 20);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Telefono";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(246, 325);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(60, 20);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "Estado";
+            this.label4.Text = "Teléfono";
             // 
             // btn_crearcliente
             // 
@@ -150,11 +132,9 @@
             this.BackgroundImage = global::canchacubo.Properties.Resources.fondo;
             this.ClientSize = new System.Drawing.Size(923, 450);
             this.Controls.Add(this.btn_crearcliente);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txt_estado);
             this.Controls.Add(this.txt_telefono);
             this.Controls.Add(this.txtt_nombre);
             this.Controls.Add(this.txt_identificacion);
@@ -174,11 +154,9 @@
         private System.Windows.Forms.TextBox txt_identificacion;
         private System.Windows.Forms.TextBox txtt_nombre;
         private System.Windows.Forms.TextBox txt_telefono;
-        private System.Windows.Forms.TextBox txt_estado;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btn_crearcliente;
     }
 }
